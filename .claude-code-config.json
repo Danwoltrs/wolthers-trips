@@ -1,0 +1,55 @@
+﻿{
+  "project": {
+    "name": "Wolthers Travel Management System",
+    "description": "Replicating and modernizing existing travel itinerary system",
+    "type": "fullstack-web-app",
+    "framework": "next.js",
+    "database": "supabase",
+    "language": "typescript"
+  },
+  "legacy_analysis": {
+    "enabled": true,
+    "legacy_path": "./legacy/",
+    "analysis_document": "./legacy/ANALYSIS.md",
+    "migration_strategy": "feature_by_feature",
+    "preserve_business_logic": true
+  },
+  "development": {
+    "api_first": true,
+    "no_mock_data": true,
+    "file_line_limit": 500,
+    "feature_based_structure": true,
+    "real_time_integration": true,
+    "mobile_first": true
+  },
+  "ai_assistance": {
+    "analyze_legacy_code": true,
+    "suggest_improvements": true,
+    "code_generation": "production_ready",
+    "error_handling": "comprehensive",
+    "testing": "required",
+    "documentation": "inline_and_external",
+    "performance": "optimized"
+  },
+  "constraints": {
+    "max_lines_per_file": 500,
+    "typescript_strict": true,
+    "api_integration_required": true,
+    "security_first": true,
+    "accessibility_compliant": true,
+    "seo_optimized": true
+  },
+  "migration_priorities": [
+    "authentication_system",
+    "trip_management",
+    "user_interface",
+    "file_handling",
+    "email_system",
+    "advanced_features"
+  ],
+  "windows_development": {
+    "powershell_commands": true,
+    "line_endings": "crlf",
+    "case_sensitive": false
+  }
+}
