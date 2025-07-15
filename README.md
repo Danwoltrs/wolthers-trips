@@ -51,10 +51,11 @@ pm run dev
 ## Contributing
 
 This project uses conventional commits. Please follow the format:
-- eat: for new features
-- ix: for bug fixes
+- feat: for new features
+- fix: for bug fixes
 - docs: for documentation
 - style: for formatting
-- efactor: for code refactoring
+- 
+efactor: for code refactoring
 - 	est: for tests
 - chore: for maintenance
