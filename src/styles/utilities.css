@@ -1,0 +1,300 @@
+/* Utility classes for Wolthers Travel App */
+
+/* Background Color Utilities */
+.bg-background { background-color: var(--background); }
+.bg-foreground { background-color: var(--foreground); }
+.bg-card { background-color: var(--card); }
+.bg-card-foreground { background-color: var(--card-foreground); }
+.bg-popover { background-color: var(--popover); }
+.bg-popover-foreground { background-color: var(--popover-foreground); }
+.bg-primary { background-color: var(--primary); }
+.bg-primary-foreground { background-color: var(--primary-foreground); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-secondary-foreground { background-color: var(--secondary-foreground); }
+.bg-muted { background-color: var(--muted); }
+.bg-muted-foreground { background-color: var(--muted-foreground); }
+.bg-accent { background-color: var(--accent); }
+.bg-accent-foreground { background-color: var(--accent-foreground); }
+.bg-destructive { background-color: var(--destructive); }
+.bg-destructive-foreground { background-color: var(--destructive-foreground); }
+.bg-sidebar { background-color: var(--sidebar); }
+.bg-sidebar-foreground { background-color: var(--sidebar-foreground); }
+.bg-sidebar-primary { background-color: var(--sidebar-primary); }
+.bg-sidebar-primary-foreground { background-color: var(--sidebar-primary-foreground); }
+.bg-sidebar-accent { background-color: var(--sidebar-accent); }
+.bg-sidebar-accent-foreground { background-color: var(--sidebar-accent-foreground); }
+
+/* Text Color Utilities */
+.text-background { color: var(--background); }
+.text-foreground { color: var(--foreground); }
+.text-card { color: var(--card); }
+.text-card-foreground { color: var(--card-foreground); }
+.text-popover { color: var(--popover); }
+.text-popover-foreground { color: var(--popover-foreground); }
+.text-primary { color: var(--primary); }
+.text-primary-foreground { color: var(--primary-foreground); }
+.text-secondary { color: var(--secondary); }
+.text-secondary-foreground { color: var(--secondary-foreground); }
+.text-muted { color: var(--muted); }
+.text-muted-foreground { color: var(--muted-foreground); }
+.text-accent { color: var(--accent); }
+.text-accent-foreground { color: var(--accent-foreground); }
+.text-destructive { color: var(--destructive); }
+.text-destructive-foreground { color: var(--destructive-foreground); }
+.text-sidebar { color: var(--sidebar); }
+.text-sidebar-foreground { color: var(--sidebar-foreground); }
+.text-sidebar-primary { color: var(--sidebar-primary); }
+.text-sidebar-primary-foreground { color: var(--sidebar-primary-foreground); }
+.text-sidebar-accent { color: var(--sidebar-accent); }
+.text-sidebar-accent-foreground { color: var(--sidebar-accent-foreground); }
+
+/* Border Color Utilities */
+.border-background { border-color: var(--background); }
+.border-foreground { border-color: var(--foreground); }
+.border-card { border-color: var(--card); }
+.border-card-foreground { border-color: var(--card-foreground); }
+.border-popover { border-color: var(--popover); }
+.border-popover-foreground { border-color: var(--popover-foreground); }
+.border-primary { border-color: var(--primary); }
+.border-primary-foreground { border-color: var(--primary-foreground); }
+.border-secondary { border-color: var(--secondary); }
+.border-secondary-foreground { border-color: var(--secondary-foreground); }
+.border-muted { border-color: var(--muted); }
+.border-muted-foreground { border-color: var(--muted-foreground); }
+.border-accent { border-color: var(--accent); }
+.border-accent-foreground { border-color: var(--accent-foreground); }
+.border-destructive { border-color: var(--destructive); }
+.border-destructive-foreground { border-color: var(--destructive-foreground); }
+.border-border { border-color: var(--border); }
+.border-input { border-color: var(--input); }
+.border-ring { border-color: var(--ring); }
+.border-sidebar { border-color: var(--sidebar); }
+.border-sidebar-foreground { border-color: var(--sidebar-foreground); }
+.border-sidebar-primary { border-color: var(--sidebar-primary); }
+.border-sidebar-primary-foreground { border-color: var(--sidebar-primary-foreground); }
+.border-sidebar-accent { border-color: var(--sidebar-accent); }
+.border-sidebar-accent-foreground { border-color: var(--sidebar-accent-foreground); }
+.border-sidebar-border { border-color: var(--sidebar-border); }
+.border-sidebar-ring { border-color: var(--sidebar-ring); }
+
+/* Chart Color Utilities */
+.bg-chart-1 { background-color: var(--chart-1); }
+.bg-chart-2 { background-color: var(--chart-2); }
+.bg-chart-3 { background-color: var(--chart-3); }
+.bg-chart-4 { background-color: var(--chart-4); }
+.bg-chart-5 { background-color: var(--chart-5); }
+
+.text-chart-1 { color: var(--chart-1); }
+.text-chart-2 { color: var(--chart-2); }
+.text-chart-3 { color: var(--chart-3); }
+.text-chart-4 { color: var(--chart-4); }
+.text-chart-5 { color: var(--chart-5); }
+
+.border-chart-1 { border-color: var(--chart-1); }
+.border-chart-2 { border-color: var(--chart-2); }
+.border-chart-3 { border-color: var(--chart-3); }
+.border-chart-4 { border-color: var(--chart-4); }
+.border-chart-5 { border-color: var(--chart-5); }
+
+/* Shadow Utilities */
+.shadow-2xs { box-shadow: var(--shadow-2xs); }
+.shadow-xs { box-shadow: var(--shadow-xs); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow { box-shadow: var(--shadow); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+.shadow-2xl { box-shadow: var(--shadow-2xl); }
+
+/* Border Radius Utilities */
+.rounded-sm { border-radius: var(--radius-sm); }
+.rounded-md { border-radius: var(--radius-md); }
+.rounded-lg { border-radius: var(--radius-lg); }
+.rounded-xl { border-radius: var(--radius-xl); }
+
+/* Font Family Utilities */
+.font-sans { font-family: var(--font-sans); }
+.font-serif { font-family: var(--font-serif); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Ring Utilities */
+.ring-background { --tw-ring-color: var(--background); }
+.ring-foreground { --tw-ring-color: var(--foreground); }
+.ring-primary { --tw-ring-color: var(--primary); }
+.ring-secondary { --tw-ring-color: var(--secondary); }
+.ring-accent { --tw-ring-color: var(--accent); }
+.ring-destructive { --tw-ring-color: var(--destructive); }
+.ring-muted { --tw-ring-color: var(--muted); }
+.ring-border { --tw-ring-color: var(--border); }
+.ring-input { --tw-ring-color: var(--input); }
+.ring-ring { --tw-ring-color: var(--ring); }
+.ring-sidebar { --tw-ring-color: var(--sidebar); }
+.ring-sidebar-ring { --tw-ring-color: var(--sidebar-ring); }
+
+/* Hover state utilities */
+.hover\:bg-primary:hover { background-color: var(--primary); }
+.hover\:bg-secondary:hover { background-color: var(--secondary); }
+.hover\:bg-accent:hover { background-color: var(--accent); }
+.hover\:bg-destructive:hover { background-color: var(--destructive); }
+.hover\:bg-muted:hover { background-color: var(--muted); }
+.hover\:bg-sidebar-accent:hover { background-color: var(--sidebar-accent); }
+.hover\:bg-sidebar-primary:hover { background-color: var(--sidebar-primary); }
+
+.hover\:text-primary:hover { color: var(--primary); }
+.hover\:text-secondary:hover { color: var(--secondary); }
+.hover\:text-accent:hover { color: var(--accent); }
+.hover\:text-destructive:hover { color: var(--destructive); }
+.hover\:text-muted:hover { color: var(--muted); }
+.hover\:text-accent-foreground:hover { color: var(--accent-foreground); }
+.hover\:text-sidebar-accent-foreground:hover { color: var(--sidebar-accent-foreground); }
+.hover\:text-sidebar-primary-foreground:hover { color: var(--sidebar-primary-foreground); }
+
+.hover\:border-primary:hover { border-color: var(--primary); }
+.hover\:border-secondary:hover { border-color: var(--secondary); }
+.hover\:border-accent:hover { border-color: var(--accent); }
+.hover\:border-destructive:hover { border-color: var(--destructive); }
+.hover\:border-input:hover { border-color: var(--input); }
+
+/* Focus state utilities */
+.focus\:ring-primary:focus { --tw-ring-color: var(--primary); }
+.focus\:ring-secondary:focus { --tw-ring-color: var(--secondary); }
+.focus\:ring-accent:focus { --tw-ring-color: var(--accent); }
+.focus\:ring-destructive:focus { --tw-ring-color: var(--destructive); }
+.focus\:ring-ring:focus { --tw-ring-color: var(--ring); }
+
+/* Dark mode utilities */
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-background { background-color: var(--background); }
+  .dark\:bg-foreground { background-color: var(--foreground); }
+  .dark\:bg-card { background-color: var(--card); }
+  .dark\:bg-primary { background-color: var(--primary); }
+  .dark\:bg-secondary { background-color: var(--secondary); }
+  .dark\:bg-accent { background-color: var(--accent); }
+  .dark\:bg-destructive { background-color: var(--destructive); }
+  .dark\:bg-muted { background-color: var(--muted); }
+  .dark\:bg-sidebar { background-color: var(--sidebar); }
+  
+  .dark\:text-background { color: var(--background); }
+  .dark\:text-foreground { color: var(--foreground); }
+  .dark\:text-card { color: var(--card); }
+  .dark\:text-primary { color: var(--primary); }
+  .dark\:text-secondary { color: var(--secondary); }
+  .dark\:text-accent { color: var(--accent); }
+  .dark\:text-destructive { color: var(--destructive); }
+  .dark\:text-muted-foreground { color: var(--muted-foreground); }
+  .dark\:text-sidebar-foreground { color: var(--sidebar-foreground); }
+  
+  .dark\:border-background { border-color: var(--background); }
+  .dark\:border-foreground { border-color: var(--foreground); }
+  .dark\:border-primary { border-color: var(--primary); }
+  .dark\:border-secondary { border-color: var(--secondary); }
+  .dark\:border-accent { border-color: var(--accent); }
+  .dark\:border-destructive { border-color: var(--destructive); }
+  .dark\:border-border { border-color: var(--border); }
+  .dark\:border-input { border-color: var(--input); }
+  .dark\:border-sidebar-border { border-color: var(--sidebar-border); }
+}
+
+/* Accessibility utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Animation utilities */
+.animate-in {
+  animation: animate-in 0.15s ease-out;
+}
+
+.animate-out {
+  animation: animate-out 0.15s ease-in;
+}
+
+@keyframes animate-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animate-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Travel app specific utilities */
+.expense-status-pending {
+  @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+}
+
+.expense-status-approved {
+  @apply bg-green-100 text-green-800 border-green-200;
+}
+
+.expense-status-rejected {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
+
+.trip-status-active {
+  @apply bg-blue-100 text-blue-800 border-blue-200;
+}
+
+.trip-status-completed {
+  @apply bg-gray-100 text-gray-800 border-gray-200;
+}
+
+.trip-status-cancelled {
+  @apply bg-red-100 text-red-800 border-red-200;
+}
+
+/* Currency utilities */
+.currency-usd { @apply text-green-600; }
+.currency-eur { @apply text-blue-600; }
+.currency-gbp { @apply text-purple-600; }
+.currency-cad { @apply text-red-600; }
+.currency-default { @apply text-foreground; }
+
+/* Priority utilities */
+.priority-low { @apply text-green-600; }
+.priority-medium { @apply text-yellow-600; }
+.priority-high { @apply text-red-600; }
+.priority-urgent { @apply text-red-800 font-bold; }
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .mobile\:hidden { display: none; }
+  .mobile\:block { display: block; }
+  .mobile\:flex { display: flex; }
+  .mobile\:grid { display: grid; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet\:hidden { display: none; }
+  .tablet\:block { display: block; }
+  .tablet\:flex { display: flex; }
+  .tablet\:grid { display: grid; }
+}
+
+@media (min-width: 1025px) {
+  .desktop\:hidden { display: none; }
+  .desktop\:block { display: block; }
+  .desktop\:flex { display: flex; }
+  .desktop\:grid { display: grid; }
+}
