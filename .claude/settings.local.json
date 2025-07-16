@@ -21,7 +21,9 @@
       "Bash(git add:*)",
       "Bash(git push:*)",
       "WebFetch(domain:wolthers-trips.vercel.app)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm ls:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }

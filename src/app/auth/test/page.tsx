@@ -67,7 +67,7 @@ function AuthTestContent() {
           </div>
           <div className="card-content space-y-4">
             <button
-              onClick={() => signIn('microsoft')}
+              onClick={() => signIn('azure-ad')}
               className="btn btn-primary w-full"
             >
               Sign in with Microsoft

@@ -1,5 +1,5 @@
 import { NextAuthOptions } from 'next-auth';
-import MicrosoftProvider from 'next-auth/providers/microsoft';
+import AzureADProvider from 'next-auth/providers/azure-ad';
 import EmailProvider from 'next-auth/providers/email';
 import { createTransport } from 'nodemailer';
 
@@ -32,9 +32,10 @@ const authConfig = getAuthConfig();
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    MicrosoftProvider({
+    AzureADProvider({
       clientId: process.env.MICROSOFT_CLIENT_ID!,
       clientSecret: process.env.MICROSOFT_CLIENT_SECRET!,
+      tenantId: process.env.AZURE_AD_TENANT_ID || 'common',
       authorization: {
         params: {
           scope: 'openid email profile User.Read',
