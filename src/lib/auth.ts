@@ -30,11 +30,14 @@ const getAuthConfig = () => {
 
 const authConfig = getAuthConfig();
 
-export const authOptions: NextAuthOptions = {
-  providers: [
+const providers = [];
+
+// Add Microsoft OAuth if credentials are available
+if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
+  providers.push(
     AzureADProvider({
-      clientId: process.env.MICROSOFT_CLIENT_ID!,
-      clientSecret: process.env.MICROSOFT_CLIENT_SECRET!,
+      clientId: process.env.MICROSOFT_CLIENT_ID,
+      clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
       tenantId: process.env.AZURE_AD_TENANT_ID || 'common',
       authorization: {
         params: {
@@ -42,18 +45,24 @@ export const authOptions: NextAuthOptions = {
           prompt: 'select_account',
         },
       },
-    }),
+    })
+  );
+}
+
+// Add Email provider only if SMTP is configured
+if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD && process.env.SMTP_FROM) {
+  providers.push(
     EmailProvider({
       server: {
-        host: process.env.SMTP_HOST!,
+        host: process.env.SMTP_HOST,
         port: parseInt(process.env.SMTP_PORT || '587'),
         auth: {
-          user: process.env.SMTP_USER!,
-          pass: process.env.SMTP_PASSWORD!,
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
         },
         secure: false, // Use TLS
       },
-      from: process.env.SMTP_FROM!,
+      from: process.env.SMTP_FROM,
       sendVerificationRequest: async ({ identifier, url, provider }) => {
         const transport = createTransport(provider.server);
         
@@ -78,8 +87,12 @@ export const authOptions: NextAuthOptions = {
           throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`);
         }
       },
-    }),
-  ],
+    })
+  );
+}
+
+export const authOptions: NextAuthOptions = {
+  providers,
   callbacks: {
     async signIn({ user, account, profile }) {
       // Auto-approve @wolthers.com domains

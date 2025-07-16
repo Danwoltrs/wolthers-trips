@@ -1,13 +1,13 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/api/debug/route": "app/api/debug/route.js",
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/health/route": "app/api/health/route.js",
-  "/api/simple-test/route": "app/api/simple-test/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/mcp/reimbursements/route": "app/api/mcp/reimbursements/route.js",
+  "/api/debug/route": "app/api/debug/route.js",
   "/api/mcp/trip-costs/route": "app/api/mcp/trip-costs/route.js",
+  "/api/simple-test/route": "app/api/simple-test/route.js",
   "/auth/test/page": "app/auth/test/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
   "/page": "app/page.js",
-  "/test-page/page": "app/test-page/page.js"
+  "/test-page/page": "app/test-page/page.js",
+  "/dashboard/page": "app/dashboard/page.js"
 }

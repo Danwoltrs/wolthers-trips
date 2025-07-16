@@ -73,20 +73,16 @@ function AuthTestContent() {
               Sign in with Microsoft
             </button>
             
-            <div className="text-center text-sm text-muted-foreground">
-              or
-            </div>
-            
             <button
-              onClick={() => signIn('email')}
+              onClick={() => signIn()}
               className="btn btn-outline w-full"
             >
-              Sign in with Email
+              Sign in with Default Provider
             </button>
             
             <div className="text-xs text-muted-foreground">
               <p>Microsoft: Auto-approved for @wolthers.com</p>
-              <p>Email: OTP sent to your email address</p>
+              <p>If Microsoft OAuth is not configured, default provider will be used</p>
             </div>
           </div>
         </div>
