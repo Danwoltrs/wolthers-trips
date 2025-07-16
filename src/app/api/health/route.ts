@@ -17,7 +17,7 @@ export async function GET() {
     // Simple health check query that should always work
     const { data, error } = await supabase
       .from('companies')
-      .select('count')
+      .select('id')
       .limit(1);
 
     if (error) {
