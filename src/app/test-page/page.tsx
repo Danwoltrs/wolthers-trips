@@ -17,7 +17,7 @@ export default function TestPage() {
       console.log('Database test result:', result)
     } catch (error) {
       console.error('Database test failed:', error)
-      setDbResult({ error: error.message })
+      setDbResult({ error: error instanceof Error ? error.message : 'Unknown error' })
     }
     setLoading(false)
   }
@@ -30,7 +30,7 @@ export default function TestPage() {
       console.log('Storage test result:', result)
     } catch (error) {
       console.error('Storage test failed:', error)
-      setStorageResult({ error: error.message })
+      setStorageResult({ error: error instanceof Error ? error.message : 'Unknown error' })
     }
     setLoading(false)
   }

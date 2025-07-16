@@ -39,6 +39,6 @@ export async function testDatabaseConnection() {
   
     } catch (error) {
       console.error('Unexpected database error:', error)
-      return { error: error.message }
+      return { error: error instanceof Error ? error.message : 'Unknown error' }
     }
   }
