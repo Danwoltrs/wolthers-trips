@@ -2,7 +2,7 @@
 ## Comprehensive Technical Specification & Deep Implementation Guide
 
 ### Tech Stack & Architecture
-- **Frontend**: React 18+ with TypeScript, Tailwind CSS
+- **Frontend**: React 18+ with TypeScript, Tailwind CSS with OKLCH color system
 - **Backend**: Supabase (PostgreSQL 15+, Row Level Security, Real-time subscriptions)
 - **Email**: Hostinger SMTP with template engine
 - **AI Integration**: Claude API (Anthropic) + OpenAI GPT-4
@@ -10,6 +10,7 @@
 - **Deployment**: Hostinger VPS with Docker containers
 - **State Management**: Zustand + React Query for server state
 - **File Storage**: Supabase Storage with CDN
+- **Design System**: Centralized OKLCH color system with light/dark theme support
 
 ---
 
@@ -68,7 +69,228 @@ const autoLoginRules = {
 
 ---
 
-## 2. Dashboard Deep Architecture
+## 2. UI Design System & Color Architecture
+
+### Centralized OKLCH Color System
+The application implements a comprehensive color system using exact OKLCH values for consistent, theme-aware design across all components:
+
+```css
+/* Brand Colors */
+--primary: oklch(0.4293 0.0597 164.4252);           /* Wolthers brand green */
+--primary-foreground: oklch(0.9895 0.0090 78.2827); /* Text on primary */
+--secondary: oklch(1.0000 0 0);                      /* Clean white */
+--secondary-foreground: oklch(0.4298 0.0589 164.0275); /* Green on white */
+
+/* Layout Colors */
+--background: oklch(0.9500 0.0156 86.4259);         /* App background */
+--foreground: oklch(0 0 0);                         /* Main text */
+--card: oklch(1 0 0);                               /* Card backgrounds */
+--card-foreground: oklch(0.1450 0 0);               /* Card text */
+
+/* Interactive Elements */
+--accent: oklch(0.7882 0.0642 76.1505);             /* Hover states */
+--accent-foreground: oklch(0 0 0);                  /* Text on accent */
+--muted: oklch(0.9700 0 0);                         /* Subtle backgrounds */
+--muted-foreground: oklch(0.5560 0 0);              /* Muted text */
+
+/* Functional Colors */
+--destructive: oklch(0.5770 0.2450 27.3250);        /* Error states */
+--destructive-foreground: oklch(1 0 0);             /* Text on error */
+--border: oklch(0.9220 0 0);                        /* Borders */
+--input: oklch(0.9220 0 0);                         /* Input backgrounds */
+--ring: oklch(0.7080 0 0);                          /* Focus rings */
+
+/* Data Visualization */
+--chart-1: oklch(0.4166 0.0697 152.1075);          /* Chart color 1 */
+--chart-2: oklch(0.6539 0.1132 151.7077);          /* Chart color 2 */
+--chart-3: oklch(0.8343 0.1055 152.9098);          /* Chart color 3 */
+--chart-4: oklch(0.9486 0.0717 154.6254);          /* Chart color 4 */
+--chart-5: oklch(0.9906 0.0139 155.5988);          /* Chart color 5 */
+
+/* Sidebar Navigation */
+--sidebar: oklch(0.9850 0 0);                       /* Sidebar background */
+--sidebar-foreground: oklch(0.5240 0.2080 28.5186); /* Sidebar text */
+--sidebar-primary: oklch(0.2050 0 0);               /* Active nav item */
+--sidebar-primary-foreground: oklch(0.9850 0 0);   /* Active nav text */
+--sidebar-accent: oklch(0.9700 0 0);                /* Hover nav item */
+--sidebar-accent-foreground: oklch(0.2050 0 0);    /* Hover nav text */
+```
+
+### Dark Mode Implementation
+Complete dark mode support with automatic system detection:
+
+```css
+.dark {
+  --background: oklch(0.2407 0.0083 240.2250);
+  --foreground: oklch(0.7595 0.0107 238.5621);
+  --card: oklch(0.2236 0.0084 240.2744);
+  --card-foreground: oklch(0.9851 0 0);
+  /* ... all colors optimized for dark backgrounds */
+}
+```
+
+### Theme Management System
+```typescript
+interface ThemeSystem {
+  // Theme provider with React context
+  provider: ThemeProvider;
+  
+  // Theme switching component
+  toggle: ThemeToggle;
+  
+  // Persistence with SSR safety
+  storage: {
+    key: 'wolthers-travel-theme';
+    location: 'localStorage';
+    ssr_safe: true;
+  };
+  
+  // Auto-detection
+  system_preference: 'prefers-color-scheme';
+  
+  // Theme states
+  themes: ['light', 'dark', 'system'];
+}
+```
+
+### Component Library Architecture
+```typescript
+// Base button system
+interface ButtonVariants {
+  primary: 'bg-primary text-primary-foreground';
+  secondary: 'bg-secondary text-secondary-foreground';
+  outline: 'border-input hover:bg-accent';
+  ghost: 'hover:bg-accent hover:text-accent-foreground';
+  destructive: 'bg-destructive text-destructive-foreground';
+}
+
+// Card component system
+interface CardComponents {
+  card: 'bg-card text-card-foreground rounded-lg border shadow-sm';
+  header: 'flex flex-col space-y-1.5 p-6';
+  title: 'text-2xl font-semibold leading-none tracking-tight';
+  content: 'p-6 pt-0';
+  footer: 'flex items-center p-6 pt-0';
+}
+
+// Travel-specific components
+interface TravelComponents {
+  trip_card: 'dashboard-card hover:shadow-md transition-shadow';
+  expense_item: 'flex items-center justify-between p-4 border-b';
+  status_badges: {
+    pending: 'bg-yellow-100 text-yellow-800';
+    approved: 'bg-green-100 text-green-800';
+    rejected: 'bg-red-100 text-red-800';
+  };
+  currency_display: {
+    usd: 'text-green-600';
+    eur: 'text-blue-600';
+    brl: 'text-yellow-600';
+  };
+}
+```
+
+### Responsive Design System
+```css
+/* Mobile-first responsive utilities */
+@media (max-width: 640px) {
+  .dashboard-card { padding: 1rem; }
+  .sidebar { width: 100%; }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet\:hidden { display: none; }
+  .tablet\:grid { display: grid; }
+}
+
+@media (min-width: 1025px) {
+  .desktop\:flex { display: flex; }
+}
+```
+
+### Accessibility Implementation
+- **WCAG 2.1 AA Compliance**: All color combinations tested for contrast
+- **Focus Management**: Consistent focus ring system using `--ring` color
+- **Screen Reader Support**: Semantic HTML with proper ARIA labels
+- **Keyboard Navigation**: Full keyboard accessibility for all interactive elements
+- **Color Independence**: Information never conveyed by color alone
+
+### Implementation Files
+```
+src/styles/
+├── globals.css          # Main color definitions & CSS variables
+├── components.css       # Component-specific styles
+└── utilities.css        # Utility classes & responsive helpers
+
+src/components/
+├── theme-provider.tsx   # Theme management context
+├── theme-toggle.tsx     # Theme switching UI
+└── color-demo.tsx       # Interactive color system demo
+```
+
+### Design Tokens Integration
+```typescript
+// Tailwind configuration with CSS variables
+export default {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
+        },
+        // ... full color mapping
+      },
+      fontFamily: {
+        sans: ['var(--font-sans)'],
+        mono: ['var(--font-mono)'],
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+    },
+  },
+};
+```
+
+### Usage Examples
+```tsx
+// Using semantic color classes
+<div className="bg-primary text-primary-foreground">
+  Primary action button
+</div>
+
+// Using component classes
+<div className="card">
+  <div className="card-header">
+    <h3 className="card-title">Trip Details</h3>
+  </div>
+  <div className="card-content">
+    <span className="badge expense-status-pending">Pending</span>
+  </div>
+</div>
+
+// Using CSS variables directly
+<div style={{ backgroundColor: 'var(--accent)' }}>
+  Custom component
+</div>
+```
+
+### Color System Testing
+- **Interactive Demo**: Available at `/test-page` → "View Color System"
+- **Component Showcase**: All styled components with live examples
+- **Theme Switching**: Real-time theme switching demonstration
+- **Accessibility Testing**: Color contrast validation tools
+- **Browser Compatibility**: OKLCH color space support verification
+
+---
+
+## 3. Dashboard Deep Architecture
 
 ### Sticky Header Implementation
 ```typescript

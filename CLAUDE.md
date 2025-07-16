@@ -16,8 +16,9 @@ This is a comprehensive travel itinerary management web application for Wolthers
 - **Next.js 14+** with App Router for both frontend and backend
 - **TypeScript** throughout the entire application
 - **Supabase** as primary backend (PostgreSQL + Auth + Storage + Real-time)
-- **Tailwind CSS** for styling with dark/light mode support
+- **Tailwind CSS** for styling with centralized color system and dark/light mode support
 - **React** for component-based UI development
+- **OKLCH Color System** for consistent theme-aware design
 
 ### Core Libraries & Services
 - **NextAuth.js** for authentication (Microsoft OAuth + Email OTP)
@@ -156,8 +157,7 @@ travel-app/
 │   │   │   ├── emails/              # Email automation
 │   │   │   ├── ooo/                 # Out of office
 │   │   │   └── hotels/              # Hotels.com integration
-│   │   ├── test/                     # Connection testing
-│   │   ├── globals.css
+│   │   ├── test-page/                # Connection testing & color demo
 │   │   ├── layout.tsx
 │   │   └── page.tsx
 │   ├── components/                   # React components
@@ -171,7 +171,10 @@ travel-app/
 │   │   ├── fleet/                   # Vehicle management
 │   │   ├── expenses/                # Expense management
 │   │   │   └── receipt-scanner/     # AI receipt processing
-│   │   └── layout/                  # Layout components
+│   │   ├── layout/                  # Layout components
+│   │   ├── theme-provider.tsx       # Theme management
+│   │   ├── theme-toggle.tsx         # Theme switching
+│   │   └── color-demo.tsx           # Color system demo
 │   ├── lib/                         # Core utilities
 │   │   ├── supabase.ts             # Supabase client & test functions
 │   │   ├── storage.ts              # Storage utilities & test functions
@@ -201,18 +204,23 @@ travel-app/
 │   │   ├── use-expenses.ts         # Expense management
 │   │   ├── use-files.ts            # File access
 │   │   └── use-currency.ts         # Currency conversion
-│   └── stores/                      # Zustand stores
-│       ├── auth-store.ts
-│       ├── trip-store.ts
-│       ├── expense-store.ts
-│       └── ui-store.ts
+│   ├── stores/                      # Zustand stores
+│   │   ├── auth-store.ts
+│   │   ├── trip-store.ts
+│   │   ├── expense-store.ts
+│   │   └── ui-store.ts
+│   └── styles/                      # Centralized styling
+│       ├── globals.css              # Color system & CSS variables
+│       ├── components.css           # Component-specific styles
+│       └── utilities.css            # Utility classes
 ├── docs/                            # Documentation
-│   ├── DATABASE_DOCUMENTATION.md   # Complete DB schema
-│   ├── SPECIFICATION.md             # Full requirements
+│   ├── database_documentation.md   # Complete DB schema
+│   ├── travel_app_spec.md          # Full requirements
 │   └── DEPLOYMENT.md                # Deployment guide
+├── COLOR_SYSTEM_README.md          # Color system documentation
 ├── .env.local                       # Environment variables
 ├── next.config.js
-├── tailwind.config.js
+├── tailwind.config.ts
 ├── package.json
 └── tsconfig.json
 ```
@@ -510,6 +518,71 @@ interface TripBranching {
 - **Cost tracking** and client billing integration
 - **Preference-based recommendations**
 
+## 🎨 Color System & Design
+
+### Centralized OKLCH Color System
+The application uses a comprehensive color system based on exact OKLCH values for consistent, theme-aware design:
+
+```css
+/* Primary Colors */
+--primary: oklch(0.4293 0.0597 164.4252);
+--primary-foreground: oklch(0.9895 0.0090 78.2827);
+--secondary: oklch(1.0000 0 0);
+--secondary-foreground: oklch(0.4298 0.0589 164.0275);
+
+/* Background & Text */
+--background: oklch(0.9500 0.0156 86.4259);
+--foreground: oklch(0 0 0);
+--card: oklch(1 0 0);
+--card-foreground: oklch(0.1450 0 0);
+
+/* Accent & States */
+--accent: oklch(0.7882 0.0642 76.1505);
+--accent-foreground: oklch(0 0 0);
+--destructive: oklch(0.5770 0.2450 27.3250);
+--destructive-foreground: oklch(1 0 0);
+```
+
+### Theme System Features
+- **Light/Dark Mode**: Complete theme switching with automatic system detection
+- **Theme Persistence**: localStorage with SSR-safe hydration
+- **Theme Provider**: React context for theme management
+- **CSS Variables**: All colors defined as CSS custom properties
+- **Tailwind Integration**: Full integration with Tailwind CSS utilities
+
+### Component Library
+```typescript
+// Pre-built components with consistent styling
+<button className="btn btn-primary">Primary Button</button>
+<div className="card">
+  <div className="card-header">
+    <h3 className="card-title">Title</h3>
+  </div>
+  <div className="card-content">Content</div>
+</div>
+
+// Travel-specific components
+<div className="trip-card">
+  <span className="badge expense-status-pending">Pending</span>
+  <div className="expense-amount currency-usd">$250.00</div>
+</div>
+```
+
+### Color Categories
+- **Primary/Secondary**: Brand colors and interactions
+- **Background/Foreground**: Base layout colors
+- **Accent/Muted**: Highlighting and subtle text
+- **Destructive**: Error states and warnings
+- **Chart Colors**: 5 colors for data visualization
+- **Sidebar Colors**: Navigation-specific palette
+- **Travel Components**: Status badges, currency displays
+
+### Documentation
+- **COLOR_SYSTEM_README.md**: Complete implementation guide
+- **Interactive Demo**: Available at `/test-page` → "View Color System"
+- **Component Examples**: All styled components with usage examples
+- **Migration Guide**: From hardcoded colors to CSS variables
+
 ## 🧪 Testing & Development
 
 ### Current Implementation Status
@@ -517,7 +590,8 @@ interface TripBranching {
 - ✅ **Storage buckets** - Created and configured
 - ✅ **Basic authentication** - Ready for implementation
 - ✅ **Environment variables** - Configured for development
-- 🔄 **Connection testing** - Test page created and working
+- ✅ **Color system** - Complete OKLCH-based theme system
+- ✅ **Connection testing** - Test page created and working
 - ⏳ **Core features** - Ready for development
 
 ### Testing Strategy
