@@ -260,11 +260,13 @@ SMTP_HOST=smtp.hostinger.com
 SMTP_PORT=587
 SMTP_USER=trips@trips.wolthers.com
 SMTP_PASSWORD=whvZYkvoG8°sSE
-SMTP_FROM=ytrips@trips.wolthers.com
+SMTP_FROM=trips@trips.wolthers.com
 
 # Authentication
-NEXTAUTH_URL=https://your-domain.com (update for production)
-NEXTAUTH_SECRET=generate_secure_secret
+  # Current Vercel setup
+  NEXTAUTH_URL=https://wolthers-trips.vercel.app
+  NEXTAUTH_SECRET=T59ZpH5Mu@ZCZ*BmHt@hkt%Wm^YX^A6A
+bi
 
 # AI Services (TO BE CONFIGURED)
 CLAUDE_API_KEY=your_claude_api_key
@@ -277,7 +279,7 @@ MICROSOFT_CLIENT_ID=your_microsoft_client_id
 MICROSOFT_CLIENT_SECRET=your_microsoft_client_secret
 
 # Application Settings
-NEXT_PUBLIC_APP_URL=https://your-domain.com
+NEXT_PUBLIC_APP_URL=https://wolthers-trips.vercel.app
 NODE_ENV=production
 ```
 
