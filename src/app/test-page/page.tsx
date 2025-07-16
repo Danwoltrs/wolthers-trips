@@ -111,16 +111,19 @@ export default function TestPage() {
             {storageResult !== null && (
               <div className="mb-8">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Storage Test Results</h2>
-                <div className={`p-4 rounded-md ${!storageResult ? 'bg-red-50 border border-red-200' : 'bg-green-50 border border-green-200'}`}>
-                  {!storageResult ? (
+                <div className={`p-4 rounded-md ${storageResult.error ? 'bg-red-50 border border-red-200' : 'bg-green-50 border border-green-200'}`}>
+                  {storageResult.error ? (
                     <div>
                       <p className="text-red-800 font-medium">❌ Storage Connection Failed</p>
-                      <p className="text-red-600 text-sm mt-1">Check console for details</p>
+                      <p className="text-red-600 text-sm mt-1">{storageResult.error}</p>
                     </div>
                   ) : (
                     <div>
                       <p className="text-green-800 font-medium">✅ Storage Connected Successfully!</p>
                       <p className="text-green-700 text-sm mt-1">All required buckets are available</p>
+                      {storageResult.buckets && (
+                        <p className="text-green-600 text-xs mt-1">Buckets: {storageResult.buckets.join(', ')}</p>
+                      )}
                     </div>
                   )}
                 </div>

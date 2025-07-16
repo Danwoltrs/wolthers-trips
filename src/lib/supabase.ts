@@ -1,23 +1,37 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing Supabase environment variables')
+}
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+  },
+})
 
 // Add this function to your existing lib/supabase.ts file
 
 export async function testDatabaseConnection() {
     try {
-      // Test 1: Check if we can connect
+      // Check environment variables first
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        return { error: 'Missing Supabase environment variables' }
+      }
+
+      // Test 1: Simple connection test
       const { data: healthCheck, error: healthError } = await supabase
-        .from('users')
+        .from('companies')
         .select('count')
         .limit(1)
   
       if (healthError) {
         console.error('Database connection failed:', healthError)
-        return { error: healthError.message }
+        return { error: `Database connection failed: ${healthError.message}` }
       }
   
       // Test 2: Check if Wolthers company exists
@@ -29,7 +43,7 @@ export async function testDatabaseConnection() {
   
       if (wolthersError) {
         console.error('Wolthers company not found:', wolthersError)
-        return { error: wolthersError.message }
+        return { error: `Wolthers company not found: ${wolthersError.message}` }
       }
   
       console.log('✅ Database connection successful!')
@@ -39,6 +53,6 @@ export async function testDatabaseConnection() {
   
     } catch (error) {
       console.error('Unexpected database error:', error)
-      return { error: error instanceof Error ? error.message : 'Unknown error' }
+      return { error: error instanceof Error ? error.message : 'Unknown database error' }
     }
   }

@@ -4,33 +4,39 @@ import { supabase } from './supabase'
 // Test storage connection
 export async function testStorageConnection() {
   try {
+    // Check environment variables first
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      console.error('Missing Supabase environment variables')
+      return { error: 'Missing Supabase environment variables' }
+    }
+
     // List all buckets
     const { data: buckets, error: bucketsError } = await supabase.storage.listBuckets()
     
     if (bucketsError) {
       console.error('Storage connection failed:', bucketsError)
-      return false
+      return { error: `Storage connection failed: ${bucketsError.message}` }
     }
 
     console.log('✅ Storage connected successfully!')
-    console.log('📁 Available buckets:', buckets.map(b => b.name))
+    console.log('📁 Available buckets:', buckets?.map(b => b.name) || [])
     
     // Check if our buckets exist
     const requiredBuckets = ['receipts', 'dashboard-photos', 'documents']
-    const existingBuckets = buckets.map(b => b.name)
+    const existingBuckets = buckets?.map(b => b.name) || []
     const missingBuckets = requiredBuckets.filter(bucket => !existingBuckets.includes(bucket))
     
     if (missingBuckets.length > 0) {
       console.warn('⚠️ Missing buckets:', missingBuckets)
-      return false
+      return { error: `Missing required buckets: ${missingBuckets.join(', ')}` }
     }
     
     console.log('✅ All required buckets exist!')
-    return true
+    return { success: true, buckets: existingBuckets }
 
   } catch (error) {
     console.error('Storage test failed:', error)
-    return false
+    return { error: error instanceof Error ? error.message : 'Unknown storage error' }
   }
 }
 
