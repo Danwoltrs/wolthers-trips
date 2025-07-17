@@ -45,6 +45,7 @@ if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
           prompt: 'select_account',
         },
       },
+      checks: ['pkce', 'state'], // Enable PKCE and state validation
     })
   );
 }
