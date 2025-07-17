@@ -91,8 +91,13 @@ export const authOptions: NextAuthOptions = {
       console.log('Session callback:', { email: session.user?.email });
       // Add user role and company info to session
       if (session.user?.email) {
+        // Check for specific global admin
+        if (session.user.email === 'daniel@wolthers.com') {
+          session.user.role = 'GLOBAL_ADMIN';
+          session.user.company = 'Wolthers & Associates';
+        }
         // Check if user is Wolthers staff
-        if (session.user.email.endsWith('@wolthers.com')) {
+        else if (session.user.email.endsWith('@wolthers.com')) {
           session.user.role = 'WOLTHERS_STAFF';
           session.user.company = 'Wolthers & Associates';
         } else {
