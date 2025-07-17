@@ -43,9 +43,10 @@ if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
         params: {
           scope: 'openid email profile User.Read',
           prompt: 'select_account',
+          response_type: 'code',
         },
       },
-      checks: ['pkce', 'state'], // Enable PKCE and state validation
+      checks: ['state'], // Only use state validation, remove PKCE for now
     })
   );
 }
