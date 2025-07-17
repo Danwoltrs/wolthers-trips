@@ -59,16 +59,17 @@ export const authOptions: NextAuthOptions = {
   providers,
   callbacks: {
     async signIn({ user, account, profile }) {
+      console.log('SignIn callback:', { user: user?.email, account: account?.provider });
       // Auto-approve @wolthers.com domains
       if (user.email?.endsWith('@wolthers.com')) {
         return true;
       }
       
       // For now, allow all email providers
-      // TODO: Add database check for approved users
       return true;
     },
     async session({ session, token }) {
+      console.log('Session callback:', { email: session.user?.email });
       // Add user role and company info to session
       if (session.user?.email) {
         // Check if user is Wolthers staff
@@ -84,6 +85,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async jwt({ token, account, profile }) {
+      console.log('JWT callback:', { account: account?.provider });
       // Store account info in JWT
       if (account) {
         token.accessToken = account.access_token;
@@ -107,7 +109,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === 'development',
+  debug: true, // Enable debug in production to see callback errors
 };
 
 export default authOptions;
