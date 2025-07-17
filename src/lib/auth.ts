@@ -49,47 +49,11 @@ if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
   );
 }
 
-// Add Email provider only if SMTP is configured
-if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD && process.env.SMTP_FROM) {
-  providers.push(
-    EmailProvider({
-      server: {
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASSWORD,
-        },
-        secure: false, // Use TLS
-      },
-      from: process.env.SMTP_FROM,
-      sendVerificationRequest: async ({ identifier, url, provider }) => {
-        const transport = createTransport(provider.server);
-        
-        const result = await transport.sendMail({
-          to: identifier,
-          from: provider.from,
-          subject: `Sign in to Wolthers Travel`,
-          text: `Sign in to Wolthers Travel\n\n${url}`,
-          html: `
-            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #2563eb;">Sign in to Wolthers Travel</h2>
-              <p>Click the button below to sign in to your account:</p>
-              <a href="${url}" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 16px 0;">Sign in</a>
-              <p style="color: #666; font-size: 14px;">This link will expire in 24 hours.</p>
-              <p style="color: #666; font-size: 14px;">If you didn't request this email, you can safely ignore it.</p>
-            </div>
-          `,
-        });
-        
-        const failed = result.rejected.concat(result.pending).filter(Boolean);
-        if (failed.length) {
-          throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`);
-        }
-      },
-    })
-  );
-}
+// Email provider disabled until database adapter is implemented
+// TODO: Re-enable email provider after implementing Supabase adapter
+// if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD && process.env.SMTP_FROM) {
+//   providers.push(EmailProvider({ ... }));
+// }
 
 export const authOptions: NextAuthOptions = {
   providers,
