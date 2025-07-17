@@ -2,6 +2,7 @@ import { NextAuthOptions } from 'next-auth';
 import AzureADProvider from 'next-auth/providers/azure-ad';
 import EmailProvider from 'next-auth/providers/email';
 import { createTransport } from 'nodemailer';
+import { OAuthConfig } from 'next-auth/providers';
 
 // Environment-based configuration
 const getAuthConfig = () => {
@@ -34,21 +35,37 @@ const providers = [];
 
 // Add Microsoft OAuth if credentials are available
 if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
-  providers.push(
-    AzureADProvider({
-      clientId: process.env.MICROSOFT_CLIENT_ID,
-      clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
-      tenantId: process.env.AZURE_AD_TENANT_ID || 'b8218f6f-5191-4a79-8937-fac3bd38ee1c',
-      authorization: {
-        params: {
-          scope: 'openid email profile User.Read',
-          prompt: 'select_account',
-          response_type: 'code',
-        },
+  const tenantId = process.env.AZURE_AD_TENANT_ID || 'b8218f6f-5191-4a79-8937-fac3bd38ee1c';
+  
+  providers.push({
+    id: 'azure-ad',
+    name: 'Azure Active Directory',
+    type: 'oauth',
+    wellKnown: `https://login.microsoftonline.com/${tenantId}/v2.0/.well-known/openid-configuration`,
+    authorization: {
+      params: {
+        scope: 'openid email profile User.Read',
+        prompt: 'select_account',
+        response_type: 'code',
       },
-      checks: ['state'], // Only use state validation, remove PKCE for now
-    })
-  );
+    },
+    idToken: true,
+    checks: ['state'],
+    client: {
+      authorization_signed_response_alg: 'RS256',
+      id_token_signed_response_alg: 'RS256',
+    },
+    clientId: process.env.MICROSOFT_CLIENT_ID,
+    clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
+    profile(profile) {
+      return {
+        id: profile.sub || profile.oid,
+        name: profile.name,
+        email: profile.email || profile.preferred_username,
+        image: null,
+      };
+    },
+  } as OAuthConfig<any>);
 }
 
 // Email provider disabled until database adapter is implemented
