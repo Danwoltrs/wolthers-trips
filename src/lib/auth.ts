@@ -38,7 +38,7 @@ if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
     AzureADProvider({
       clientId: process.env.MICROSOFT_CLIENT_ID,
       clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
-      tenantId: process.env.AZURE_AD_TENANT_ID || 'common',
+      tenantId: process.env.AZURE_AD_TENANT_ID || 'b8218f6f-5191-4a79-8937-fac3bd38ee1c',
       authorization: {
         params: {
           scope: 'openid email profile User.Read',
