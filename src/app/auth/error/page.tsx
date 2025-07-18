@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import Link from 'next/link';
 
 function ErrorContent() {
   const searchParams = useSearchParams();
@@ -50,12 +51,12 @@ function ErrorContent() {
             >
               Try Again
             </a>
-            <a
+            <Link
               href="/"
               className="btn btn-outline w-full"
             >
               Go Home
-            </a>
+            </Link>
           </div>
         </div>
       </div>

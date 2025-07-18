@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function VerifyRequest() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
@@ -14,12 +16,12 @@ export default function VerifyRequest() {
               Please check your email and click the link to sign in.
             </p>
           </div>
-          <a
+          <Link
             href="/"
             className="btn btn-outline w-full"
           >
             Go Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>

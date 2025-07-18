@@ -1,8 +1,5 @@
 import { NextAuthOptions } from 'next-auth';
-import AzureADProvider from 'next-auth/providers/azure-ad';
-import EmailProvider from 'next-auth/providers/email';
-import { createTransport } from 'nodemailer';
-import { OAuthConfig } from 'next-auth/providers';
+import { OAuthConfig } from 'next-auth/providers/oauth';
 
 // Environment-based configuration
 const getAuthConfig = () => {
@@ -57,7 +54,7 @@ if (process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET) {
     },
     clientId: process.env.MICROSOFT_CLIENT_ID,
     clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
-    profile(profile) {
+    profile(profile: any) {
       return {
         id: profile.sub || profile.oid,
         name: profile.name,
@@ -120,7 +117,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: '/auth/signin',
+    signIn: '/',
     signOut: '/auth/signout',
     error: '/auth/error',
     verifyRequest: '/auth/verify-request',

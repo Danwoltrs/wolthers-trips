@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom styles for the login page */
+@layer utilities {
+  .login-gradient {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+}
+
 :root {
   --background: oklch(0.9500 0.0156 86.4259);
   --foreground: oklch(0 0 0);
