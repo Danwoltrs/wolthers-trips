@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import '../styles/variables.css'
 import '../styles/globals.css'
 import '../styles/components.css'
 import '../styles/utilities.css'
