@@ -9,34 +9,30 @@ export function Header() {
   };
 
   return (
-    <header className="bg-accent-700 shadow-lg">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <WolthersLogo variant="off-white" width={140} height={38} />
-          </div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 h-16">
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center h-full">
+        {/* Logo */}
+        <div className="flex items-center">
+          <WolthersLogo variant="green" width={140} height={38} />
+        </div>
 
-          {/* Navigation Icons */}
-          <div className="flex items-center space-x-4">
-            <button className="p-2 text-white hover:text-gray-200 rounded-md hover:bg-accent-600 transition-colors duration-200">
-              <Icon name="noteblock" size={20} />
-            </button>
-            <button className="p-2 text-white hover:text-gray-200 rounded-md hover:bg-accent-600 transition-colors duration-200">
-              <Icon name="gear" size={20} />
-            </button>
-            <button className="p-2 text-white hover:text-gray-200 rounded-md hover:bg-accent-600 transition-colors duration-200">
-              <Icon name="user" size={20} />
-            </button>
-            <button
-              onClick={handleSignOut}
-              className="p-2 text-white hover:text-gray-200 rounded-md hover:bg-red-600 transition-colors duration-200"
-            >
-              <span className="text-sm font-medium">Exit</span>
-            </button>
-            
-            
-          </div>
+        {/* User Menu Icons */}
+        <div className="flex items-center space-x-2">
+          <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+            <Icon name="user" size={16} />
+          </button>
+          <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+            <Icon name="gear" size={16} />
+          </button>
+          <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors">
+            <Icon name="noteblock" size={16} />
+          </button>
+          <button
+            onClick={handleSignOut}
+            className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+          >
+            <span className="text-sm font-medium">Logout</span>
+          </button>
         </div>
       </div>
     </header>
