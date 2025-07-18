@@ -32,7 +32,10 @@
       "Bash(npm run lint)",
       "Bash(cp:*)",
       "Bash(rm:*)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Bash(npx next build:*)",
+      "Bash(timeout 5 npm run dev)",
+      "Bash(timeout 3 npm run dev)"
     ],
     "deny": []
   }
