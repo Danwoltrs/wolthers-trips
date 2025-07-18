@@ -23,7 +23,15 @@
       "WebFetch(domain:wolthers-trips.vercel.app)",
       "Bash(git commit:*)",
       "Bash(npm ls:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(git reset:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run lint)",
+      "Bash(cp:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }

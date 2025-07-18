@@ -241,41 +241,53 @@
 
 /* Travel app specific utilities */
 .expense-status-pending {
-  @apply bg-yellow-100 text-yellow-800 border-yellow-200;
+  background-color: rgb(254 249 195);
+  color: rgb(133 77 14);
+  border-color: rgb(254 240 138);
 }
 
 .expense-status-approved {
-  @apply bg-green-100 text-green-800 border-green-200;
+  background-color: rgb(220 252 231);
+  color: rgb(21 128 61);
+  border-color: rgb(187 247 208);
 }
 
 .expense-status-rejected {
-  @apply bg-red-100 text-red-800 border-red-200;
+  background-color: rgb(254 226 226);
+  color: rgb(153 27 27);
+  border-color: rgb(254 202 202);
 }
 
 .trip-status-active {
-  @apply bg-blue-100 text-blue-800 border-blue-200;
+  background-color: rgb(219 234 254);
+  color: rgb(30 64 175);
+  border-color: rgb(191 219 254);
 }
 
 .trip-status-completed {
-  @apply bg-gray-100 text-gray-800 border-gray-200;
+  background-color: rgb(243 244 246);
+  color: rgb(55 65 81);
+  border-color: rgb(229 231 235);
 }
 
 .trip-status-cancelled {
-  @apply bg-red-100 text-red-800 border-red-200;
+  background-color: rgb(254 226 226);
+  color: rgb(153 27 27);
+  border-color: rgb(254 202 202);
 }
 
 /* Currency utilities */
-.currency-usd { @apply text-green-600; }
-.currency-eur { @apply text-blue-600; }
-.currency-gbp { @apply text-purple-600; }
-.currency-cad { @apply text-red-600; }
-.currency-default { @apply text-foreground; }
+.currency-usd { color: rgb(22 163 74); }
+.currency-eur { color: rgb(37 99 235); }
+.currency-gbp { color: rgb(147 51 234); }
+.currency-cad { color: rgb(220 38 38); }
+.currency-default { color: var(--foreground); }
 
 /* Priority utilities */
-.priority-low { @apply text-green-600; }
-.priority-medium { @apply text-yellow-600; }
-.priority-high { @apply text-red-600; }
-.priority-urgent { @apply text-red-800 font-bold; }
+.priority-low { color: rgb(22 163 74); }
+.priority-medium { color: rgb(202 138 4); }
+.priority-high { color: rgb(220 38 38); }
+.priority-urgent { color: rgb(153 27 27); font-weight: bold; }
 
 /* Responsive utilities */
 @media (max-width: 640px) {

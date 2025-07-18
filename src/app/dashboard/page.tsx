@@ -243,6 +243,23 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      {/* Debug Section - Remove after testing */}
+      <div className="space-y-4 mb-6">
+        <h2 className="text-lg font-semibold">🔧 Debug Tests (Remove after fixing)</h2>
+        <div className="bg-red-500 text-white p-4 m-4 rounded">
+          🔴 RED TEST - If you see this with red background, Tailwind is working
+        </div>
+        <div className="bg-blue-500 text-white p-4 m-4 rounded">
+          🔵 BLUE TEST - If you see this with blue background, basic Tailwind is working
+        </div>
+        <div className="bg-primary text-primary-foreground p-4 m-4 rounded">
+          🟡 CSS VARIABLE TEST - If you see this styled, CSS variables are working
+        </div>
+        <div className="bg-sidebar text-sidebar-foreground p-4 m-4 rounded">
+          🟢 SIDEBAR VARIABLE TEST - If you see this styled, sidebar variables are working
+        </div>
+      </div>
+
       {/* Welcome Section */}
       <div className="flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">
