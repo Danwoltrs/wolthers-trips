@@ -76,7 +76,7 @@ function TripCard({ trip, isPast = false }: { trip: any, isPast?: boolean }) {
       <div className="p-6 pb-4">
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="text-lg font-semibold text-secondary-900">{trip.title}</h3>
+            <h3 className="text-lg font-semibold text-gray-800">{trip.title}</h3>
             <div className="flex items-center mt-1 text-gray-500">
               <span className="text-sm mr-1">📍</span>
               <span className="text-sm">{trip.destination}</span>
