@@ -5,7 +5,7 @@ import { useNavigation } from '@/hooks/use-navigation';
 import { useBreakpoint } from '@/hooks/use-media-query';
 import { UserDropdown } from './UserDropdown';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
 interface DashboardHeaderProps {

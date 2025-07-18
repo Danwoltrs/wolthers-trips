@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { useNavigation } from '@/hooks/use-navigation';
 import { useBreakpoint } from '@/hooks/use-media-query';
 import { NavigationMenu } from './NavigationMenu';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 import { useEffect } from 'react';
 import Link from 'next/link';
 

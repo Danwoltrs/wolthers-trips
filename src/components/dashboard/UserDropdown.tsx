@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useAuth, type AuthUser } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 interface UserDropdownProps {

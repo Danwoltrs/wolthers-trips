@@ -1,200 +1,345 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useAuth } from '@/hooks/use-auth';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Plane, Users, CreditCard, Car, Building, FileText } from 'lucide-react';
 
-interface HealthCheck {
-  status: string;
-  timestamp: string;
-  database: string;
-  environment: string;
-  supabase_url?: string;
-  error?: string;
-}
+export default function DashboardPage() {
+  const { user, role } = useAuth();
 
-interface ReimbursementData {
-  due_date: number;
-  currency: string;
-  total_amount: number;
-  total_usd_amount: number;
-  total_expenses: number;
-  employees: Array<{
-    name: string;
-    email: string;
-    last_four: string;
-    amount: number;
-    usd_amount: number;
-    expense_count: number;
-    trip_title: string;
-  }>;
-}
+  const getRoleSpecificCards = () => {
+    const baseCards = [
+      {
+        title: 'Active Trips',
+        description: 'Currently ongoing trips',
+        value: '5',
+        change: '+2 this month',
+        icon: Plane,
+        color: 'text-blue-600',
+      },
+      {
+        title: 'Upcoming Meetings',
+        description: 'Scheduled meetings',
+        value: '12',
+        change: '+3 this week',
+        icon: Users,
+        color: 'text-green-600',
+      },
+    ];
 
-export default function Dashboard() {
-  const [health, setHealth] = useState<HealthCheck | null>(null);
-  const [reimbursements, setReimbursements] = useState<ReimbursementData[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Health check
-        const healthResponse = await fetch('/api/health');
-        const healthData = await healthResponse.json();
-        setHealth(healthData);
-
-        // Reimbursements
-        const reimbursementsResponse = await fetch('/api/mcp/reimbursements');
-        const reimbursementsData = await reimbursementsResponse.json();
-        if (reimbursementsData.success) {
-          setReimbursements(reimbursementsData.data);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
+    const roleSpecificCards = {
+      GLOBAL_ADMIN: [
+        ...baseCards,
+        {
+          title: 'Total Users',
+          description: 'Active system users',
+          value: '127',
+          change: '+5 new users',
+          icon: Users,
+          color: 'text-purple-600',
+        },
+        {
+          title: 'System Health',
+          description: 'Overall system status',
+          value: '98.5%',
+          change: 'All systems operational',
+          icon: FileText,
+          color: 'text-green-600',
+        },
+      ],
+      WOLTHERS_STAFF: [
+        ...baseCards,
+        {
+          title: 'Pending Expenses',
+          description: 'Awaiting approval',
+          value: '$2,450',
+          change: '8 receipts',
+          icon: CreditCard,
+          color: 'text-orange-600',
+        },
+        {
+          title: 'Fleet Status',
+          description: 'Available vehicles',
+          value: '4/6',
+          change: '2 in use',
+          icon: Car,
+          color: 'text-blue-600',
+        },
+      ],
+      FINANCE_DEPARTMENT: [
+        {
+          title: 'Pending Reimbursements',
+          description: 'Due this month',
+          value: '$15,240',
+          change: '23 employees',
+          icon: CreditCard,
+          color: 'text-red-600',
+        },
+        {
+          title: 'Client Billing',
+          description: 'Outstanding invoices',
+          value: '$45,680',
+          change: '12 clients',
+          icon: FileText,
+          color: 'text-yellow-600',
+        },
+        {
+          title: 'Monthly Budget',
+          description: 'Current utilization',
+          value: '67%',
+          change: '$89,500 spent',
+          icon: Building,
+          color: 'text-blue-600',
+        },
+        {
+          title: 'Card Due Dates',
+          description: 'Cards due this week',
+          value: '8',
+          change: '2 overdue',
+          icon: CreditCard,
+          color: 'text-red-600',
+        },
+      ],
+      COMPANY_ADMIN: [
+        ...baseCards,
+        {
+          title: 'Company Trips',
+          description: 'All company trips',
+          value: '28',
+          change: '+4 this quarter',
+          icon: Building,
+          color: 'text-purple-600',
+        },
+        {
+          title: 'Team Expenses',
+          description: 'Total team spending',
+          value: '$8,750',
+          change: 'This month',
+          icon: CreditCard,
+          color: 'text-green-600',
+        },
+      ],
+      CLIENT_ADMIN: [
+        ...baseCards,
+        {
+          title: 'Employee Trips',
+          description: 'Company employee trips',
+          value: '15',
+          change: '+2 this month',
+          icon: Users,
+          color: 'text-blue-600',
+        },
+        {
+          title: 'Trip Proposals',
+          description: 'Pending approval',
+          value: '3',
+          change: 'Awaiting decision',
+          icon: FileText,
+          color: 'text-orange-600',
+        },
+      ],
+      CLIENT: [
+        {
+          title: 'My Trips',
+          description: 'Assigned trips',
+          value: '2',
+          change: '1 upcoming',
+          icon: Plane,
+          color: 'text-blue-600',
+        },
+        {
+          title: 'My Expenses',
+          description: 'Personal expenses',
+          value: '$1,240',
+          change: '5 receipts',
+          icon: CreditCard,
+          color: 'text-green-600',
+        },
+      ],
+      DRIVER: [
+        {
+          title: 'Assigned Trips',
+          description: 'Driving assignments',
+          value: '3',
+          change: '1 today',
+          icon: Car,
+          color: 'text-blue-600',
+        },
+        {
+          title: 'Vehicle Status',
+          description: 'Current vehicle',
+          value: 'Available',
+          change: 'Ready for trips',
+          icon: Car,
+          color: 'text-green-600',
+        },
+      ],
     };
 
-    fetchData();
-  }, []);
+    return roleSpecificCards[role as keyof typeof roleSpecificCards] || baseCards;
+  };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl">Loading dashboard...</div>
-      </div>
-    );
-  }
+  const getWelcomeMessage = () => {
+    const roleMessages = {
+      GLOBAL_ADMIN: 'Welcome to the system administration dashboard',
+      WOLTHERS_STAFF: 'Welcome to your travel management dashboard',
+      FINANCE_DEPARTMENT: 'Welcome to the finance management dashboard',
+      COMPANY_ADMIN: 'Welcome to your company management dashboard',
+      CLIENT_ADMIN: 'Welcome to your business travel overview',
+      CLIENT: 'Welcome to your travel portal',
+      DRIVER: 'Welcome to your driver dashboard',
+    };
+
+    return roleMessages[role as keyof typeof roleMessages] || 'Welcome to Wolthers Trips';
+  };
+
+  const getQuickActions = () => {
+    const baseActions = [
+      { label: 'View Profile', href: '/dashboard/profile' },
+      { label: 'View Trips', href: '/dashboard/trips' },
+    ];
+
+    const roleActions = {
+      GLOBAL_ADMIN: [
+        { label: 'Manage Users', href: '/dashboard/users' },
+        { label: 'System Settings', href: '/dashboard/settings' },
+        { label: 'View Reports', href: '/dashboard/reports' },
+      ],
+      WOLTHERS_STAFF: [
+        { label: 'Create Trip', href: '/dashboard/trips/create' },
+        { label: 'Manage Expenses', href: '/dashboard/expenses' },
+        { label: 'Fleet Management', href: '/dashboard/fleet' },
+      ],
+      FINANCE_DEPARTMENT: [
+        { label: 'Process Reimbursements', href: '/dashboard/finance/reimbursements' },
+        { label: 'Client Billing', href: '/dashboard/finance/billing' },
+        { label: 'Finance Tasks', href: '/dashboard/finance/tasks' },
+      ],
+      COMPANY_ADMIN: [
+        { label: 'Manage Company', href: '/dashboard/companies' },
+        { label: 'View Team Trips', href: '/dashboard/trips' },
+        { label: 'Expense Reports', href: '/dashboard/expenses' },
+      ],
+      CLIENT_ADMIN: [
+        { label: 'Create Proposal', href: '/dashboard/trips/proposals' },
+        { label: 'View Team Trips', href: '/dashboard/trips' },
+        { label: 'Expense Overview', href: '/dashboard/expenses' },
+      ],
+      CLIENT: [
+        { label: 'My Expenses', href: '/dashboard/expenses' },
+        { label: 'Trip Documents', href: '/dashboard/documents' },
+      ],
+      DRIVER: [
+        { label: 'Vehicle Logs', href: '/dashboard/fleet/logs' },
+        { label: 'My Assignments', href: '/dashboard/assignments' },
+        { label: 'Expense Claims', href: '/dashboard/expenses' },
+      ],
+    };
+
+    return [...baseActions, ...(roleActions[role as keyof typeof roleActions] || [])];
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          Wolthers Trips Dashboard
+    <div className="space-y-6">
+      {/* Welcome Section */}
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">
+          {user?.name ? `Welcome back, ${user.name}` : 'Welcome back'}
         </h1>
-
-        {/* Health Check */}
-        <div className="mb-8">
-          <div className={`p-4 rounded-lg ${
-            health?.status === 'healthy' 
-              ? 'bg-green-50 border border-green-200' 
-              : 'bg-red-50 border border-red-200'
-          }`}>
-            <h2 className="text-lg font-semibold mb-2">System Health</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-              <div>
-                <span className="font-medium">Status:</span>{' '}
-                <span className={health?.status === 'healthy' ? 'text-green-600' : 'text-red-600'}>
-                  {health?.status || 'Unknown'}
-                </span>
-              </div>
-              <div>
-                <span className="font-medium">Database:</span>{' '}
-                <span className={health?.database === 'connected' ? 'text-green-600' : 'text-red-600'}>
-                  {health?.database || 'Unknown'}
-                </span>
-              </div>
-              <div>
-                <span className="font-medium">Environment:</span>{' '}
-                {health?.environment || 'Unknown'}
-              </div>
-              <div>
-                <span className="font-medium">Last Check:</span>{' '}
-                {health?.timestamp ? new Date(health.timestamp).toLocaleTimeString() : 'Unknown'}
-              </div>
-            </div>
-            {health?.error && (
-              <div className="mt-2 text-red-600 text-sm">
-                Error: {health.error}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Pending Reimbursements */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Pending Reimbursements
-          </h2>
-          
-          {reimbursements.length === 0 ? (
-            <div className="bg-white p-6 rounded-lg shadow border">
-              <p className="text-gray-600">No pending reimbursements found.</p>
-            </div>
-          ) : (
-            <div className="grid gap-4">
-              {reimbursements.map((reimbursement, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow border">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="text-lg font-semibold">
-                        Due: {reimbursement.due_date}th of month
-                      </h3>
-                      <p className="text-gray-600">
-                        {reimbursement.currency} {reimbursement.total_amount.toFixed(2)} 
-                        {reimbursement.currency !== 'USD' && 
-                          ` (${reimbursement.total_usd_amount.toFixed(2)} USD)`
-                        }
-                      </p>
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      {reimbursement.total_expenses} expenses
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    {reimbursement.employees.map((employee, empIndex) => (
-                      <div key={empIndex} className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                        <div>
-                          <p className="font-medium">{employee.name}</p>
-                          <p className="text-sm text-gray-600">{employee.email}</p>
-                          <p className="text-sm text-gray-600">Card: ****{employee.last_four}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-medium">
-                            {employee.amount} {reimbursement.currency}
-                          </p>
-                          <p className="text-sm text-gray-600">
-                            {employee.expense_count} expenses
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {employee.trip_title}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* MCP Information */}
-        <div className="bg-white p-6 rounded-lg shadow border">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            MCP Server Information
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <h3 className="font-medium mb-2">Available API Endpoints:</h3>
-              <ul className="space-y-1 text-gray-600">
-                <li>• /api/health - System health check</li>
-                <li>• /api/mcp/reimbursements - Pending reimbursements</li>
-                <li>• /api/mcp/trip-costs - Trip cost summaries</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium mb-2">MCP Tools Available:</h3>
-              <ul className="space-y-1 text-gray-600">
-                <li>• get_pending_reimbursements_by_due_date</li>
-                <li>• get_trip_cost_summaries</li>
-                <li>• check_meeting_confirmation_status</li>
-                <li>• analyze_expenses_by_category_currency</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <p className="text-muted-foreground">{getWelcomeMessage()}</p>
+        <Badge variant="outline" className="w-fit">
+          {role?.replace('_', ' ').toLowerCase().replace(/\b\w/g, l => l.toUpperCase())}
+        </Badge>
       </div>
+
+      {/* Statistics Cards */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {getRoleSpecificCards().map((card, index) => (
+          <Card key={index} className="hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{card.title}</CardTitle>
+              <card.icon className={`h-4 w-4 ${card.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{card.value}</div>
+              <p className="text-xs text-muted-foreground">
+                {card.change}
+              </p>
+              <CardDescription className="mt-1">{card.description}</CardDescription>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Quick Actions */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Quick Actions</CardTitle>
+          <CardDescription>
+            Common tasks and navigation shortcuts
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
+            {getQuickActions().map((action, index) => (
+              <Button
+                key={index}
+                variant="outline"
+                className="justify-start"
+                onClick={() => window.location.href = action.href}
+              >
+                {action.label}
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Recent Activity */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Recent Activity</CardTitle>
+          <CardDescription>
+            Latest updates and notifications
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium">New trip created</p>
+                <p className="text-sm text-muted-foreground">
+                  Brazil Coffee Tour - 5 participants
+                </p>
+              </div>
+              <div className="text-sm text-muted-foreground">2 hours ago</div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium">Meeting confirmed</p>
+                <p className="text-sm text-muted-foreground">
+                  Santos Coffee Cooperative - July 20th
+                </p>
+              </div>
+              <div className="text-sm text-muted-foreground">1 day ago</div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+              <div className="flex-1 space-y-1">
+                <p className="text-sm font-medium">Expense submitted</p>
+                <p className="text-sm text-muted-foreground">
+                  Hotel accommodation - $450 USD
+                </p>
+              </div>
+              <div className="text-sm text-muted-foreground">2 days ago</div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
