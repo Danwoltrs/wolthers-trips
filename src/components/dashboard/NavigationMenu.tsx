@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/utils/cn';
+import { cn } from '@/lib/utils';
 import { NavigationItem } from '@/types/dashboard';
 
 interface NavigationMenuProps {
@@ -112,18 +112,18 @@ export function NavigationMenu({
             <button
               onClick={() => handleItemClick(item)}
               className={cn(
-                'w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-nav-item-hover group',
+                'w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-all hover:bg-sidebar-accent group',
                 isActive 
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/90' 
-                  : 'text-sidebar-foreground hover:text-foreground'
+                  ? 'bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/90' 
+                  : 'text-sidebar-foreground hover:text-sidebar-accent-foreground'
               )}
               title={isCollapsed ? item.name : undefined}
             >
               <div className={cn(
                 'flex-shrink-0 transition-colors',
                 isActive 
-                  ? 'text-primary-foreground' 
-                  : 'text-sidebar-foreground group-hover:text-foreground'
+                  ? 'text-sidebar-primary-foreground' 
+                  : 'text-sidebar-foreground group-hover:text-sidebar-accent-foreground'
               )}>
                 {Icon}
               </div>
@@ -138,8 +138,8 @@ export function NavigationMenu({
                 <span className={cn(
                   'inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full',
                   isActive 
-                    ? 'bg-primary-foreground/20 text-primary-foreground' 
-                    : 'bg-primary/10 text-primary'
+                    ? 'bg-sidebar-primary-foreground/20 text-sidebar-primary-foreground' 
+                    : 'bg-sidebar-primary/10 text-sidebar-primary'
                 )}>
                   {item.badge}
                 </span>
@@ -158,10 +158,10 @@ export function NavigationMenu({
                       key={child.href}
                       onClick={() => handleItemClick(child)}
                       className={cn(
-                        'w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all hover:bg-nav-item-hover group',
+                        'w-full flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all hover:bg-sidebar-accent group',
                         isChildActive 
-                          ? 'bg-primary/10 text-primary font-medium' 
-                          : 'text-muted-foreground hover:text-foreground'
+                          ? 'bg-sidebar-primary/10 text-sidebar-primary font-medium' 
+                          : 'text-sidebar-foreground/60 hover:text-sidebar-foreground'
                       )}
                     >
                       <div className="flex-shrink-0 w-4 h-4">
@@ -171,7 +171,7 @@ export function NavigationMenu({
                         {child.name}
                       </span>
                       {child.badge && (
-                        <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-primary/10 text-primary">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-sidebar-primary/10 text-sidebar-primary">
                           {child.badge}
                         </span>
                       )}

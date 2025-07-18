@@ -42,7 +42,7 @@ export function DashboardSidebar() {
       <div 
         id="dashboard-sidebar"
         className={cn(
-          'bg-sidebar-background border-r border-border transition-all duration-300 flex flex-col',
+          'bg-sidebar border-r border-sidebar-border transition-all duration-300 flex flex-col',
           // Mobile styles
           isMobile && 'fixed inset-y-0 left-0 z-50 w-64 transform',
           isMobile && navigation.isMobileMenuOpen ? 'translate-x-0' : isMobile && '-translate-x-full',
@@ -52,7 +52,7 @@ export function DashboardSidebar() {
         )}
       >
         {/* Logo/Brand */}
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between p-4 border-b border-sidebar-border">
           <Link 
             href="/dashboard" 
             className="flex items-center space-x-2"
@@ -83,7 +83,7 @@ export function DashboardSidebar() {
                 <span className="text-sm font-semibold text-sidebar-foreground">
                   Wolthers
                 </span>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-sidebar-foreground/60">
                   Travel
                 </span>
               </div>
@@ -94,7 +94,7 @@ export function DashboardSidebar() {
           {!isMobile && (
             <button
               onClick={navigation.toggleSidebar}
-              className="p-1 rounded-md hover:bg-nav-item-hover transition-colors"
+              className="p-1 rounded-md hover:bg-sidebar-accent transition-colors"
             >
               <svg
                 className={cn(
@@ -133,10 +133,10 @@ export function DashboardSidebar() {
 
         {/* User Info Footer */}
         {user && (!navigation.isCollapsed || isMobile) && (
-          <div className="p-4 border-t border-border">
+          <div className="p-4 border-t border-sidebar-border">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
-                <span className="text-sm font-medium text-primary">
+              <div className="w-8 h-8 bg-sidebar-primary/10 rounded-full flex items-center justify-center">
+                <span className="text-sm font-medium text-sidebar-primary">
                   {user.name?.charAt(0) || user.email.charAt(0)}
                 </span>
               </div>
@@ -144,7 +144,7 @@ export function DashboardSidebar() {
                 <p className="text-sm font-medium text-sidebar-foreground truncate">
                   {user.name || user.email}
                 </p>
-                <p className="text-xs text-muted-foreground truncate">
+                <p className="text-xs text-sidebar-foreground/60 truncate">
                   {user.role?.replace('_', ' ').toLowerCase()}
                 </p>
               </div>
