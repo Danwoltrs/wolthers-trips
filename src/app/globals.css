@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Basic styling only - no CSS variables */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Simple card styles */
+.card {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.card-header {
+  padding: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.card-content {
+  padding: 1.5rem;
+  padding-top: 0;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-green {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge-blue {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.badge-yellow {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge-gray {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.btn-primary {
+  color: #ffffff;
+  background-color: #0284c7;
+}
+
+.btn-primary:hover {
+  background-color: #0369a1;
+}
+
+.btn-secondary {
+  color: #374151;
+  background-color: #ffffff;
+  border-color: #d1d5db;
+}
+
+.btn-secondary:hover {
+  background-color: #f9fafb;
+}
