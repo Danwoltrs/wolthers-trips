@@ -12,7 +12,8 @@ const trips = [
     vehicle: 'Toyota Hilux',
     driver: 'Carlos Silva',
     cities: ['São Paulo', 'Santos', 'Campinas', 'Ribeirão Preto', 'Franca'],
-    type: 'current'
+    type: 'current',
+    status: 'in_progress'
   },
   {
     id: 2,
@@ -24,7 +25,8 @@ const trips = [
     vehicle: 'Ford Ranger',
     driver: 'Miguel Torres',
     cities: ['Medellín', 'Armenia', 'Manizales'],
-    type: 'current'
+    type: 'current',
+    status: 'scheduled'
   },
   {
     id: 3,
@@ -36,7 +38,8 @@ const trips = [
     vehicle: 'Nissan Frontier',
     driver: 'Juan Morales',
     cities: ['Antigua', 'Huehuetenango', 'Cobán', 'Chimaltenango', 'Quetzaltenango', 'Sololá'],
-    type: 'current'
+    type: 'current',
+    status: 'to_be_confirmed'
   },
   {
     id: 4,
@@ -48,7 +51,8 @@ const trips = [
     vehicle: 'Chevrolet Colorado',
     driver: 'Fernando Vega',
     cities: ['San José', 'Cartago', 'Turrialba', 'Tarrazú'],
-    type: 'past'
+    type: 'past',
+    status: 'completed'
   },
   {
     id: 5,
@@ -60,17 +64,11 @@ const trips = [
     vehicle: 'Toyota Land Cruiser',
     driver: 'Ricardo Moreno',
     cities: ['Quito', 'Loja', 'Zamora', 'Vilcabamba'],
-    type: 'past'
+    type: 'past',
+    status: 'completed'
   },
 ];
 
-function calculateDaysToTrip(startDate: string) {
-  const today = new Date();
-  const tripDate = new Date(startDate);
-  const timeDiff = tripDate.getTime() - today.getTime();
-  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  return daysDiff;
-}
 
 function calculateTripDuration(startDate: string, endDate: string) {
   const start = new Date(startDate);
@@ -94,45 +92,65 @@ function formatStaffList(staff: string[]) {
   return staff.slice(0, 3).join(', ') + '...';
 }
 
-function TripCard({ trip, isPast = false }: { trip: any, isPast?: boolean }) {
-  const daysToTrip = calculateDaysToTrip(trip.startDate);
-  const tripDuration = calculateTripDuration(trip.startDate, trip.endDate);
+function getStatusBadge(status: string) {
+  const statusConfig = {
+    in_progress: { label: 'Trip in progress', className: 'bg-green-600 text-white' },
+    scheduled: { label: 'Scheduled', className: 'bg-blue-600 text-white' },
+    to_be_confirmed: { label: 'To be confirmed', className: 'bg-yellow-600 text-white' },
+    completed: { label: 'Completed', className: 'bg-gray-600 text-white' }
+  };
+  
+  const config = statusConfig[status as keyof typeof statusConfig] || { label: status, className: 'bg-gray-500 text-white' };
   
   return (
-    <div className={`trip-card h-52 ${
-      isPast ? 'opacity-60' : ''
-    }`}>
-      <div className="trip-card-content">
-        {/* Top Section - Trip Info */}
-        <div className="flex-none">
-          <h3 className="trip-card-title truncate">{trip.title}</h3>
-          <p className="trip-card-client truncate">{trip.client}</p>
-          <p className="trip-card-details">
-            {isPast ? (
-              `${tripDuration} days completed`
-            ) : (
-              `${daysToTrip > 0 ? `${daysToTrip} days to trip` : 'Trip in progress'} | ${tripDuration} days`
-            )}
-          </p>
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${config.className}`}>
+      {config.label}
+    </span>
+  );
+}
+
+function TripCard({ trip }: { trip: any }) {
+  const tripDuration = calculateTripDuration(trip.startDate, trip.endDate);
+  const startDate = new Date(trip.startDate).toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+  
+  return (
+    <div className="bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col h-full">
+      {/* Header with title and status */}
+      <div className="flex items-start justify-between mb-2">
+        <h3 className="text-lg font-semibold text-foreground flex-1 mr-2">{trip.title}</h3>
+        {getStatusBadge(trip.status)}
+      </div>
+      
+      {/* Company name as subtitle */}
+      <p className="text-muted-foreground text-sm mb-4">{trip.client}</p>
+      
+      {/* Trip duration pill and start date */}
+      <div className="mb-4">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-600 text-yellow-300">
+          {tripDuration + 1} days
+        </span>
+        <p className="text-sm text-muted-foreground mt-2">Starts {startDate}</p>
+      </div>
+      
+      {/* Card body with staff, vehicle, and cities */}
+      <div className="space-y-3 flex-1">
+        <div>
+          <p className="text-sm font-medium text-foreground mb-1">Wolthers Staff</p>
+          <p className="text-sm text-muted-foreground">{formatStaffList(trip.staff)}</p>
         </div>
         
-        {/* Visual Separator */}
-        <div className="trip-card-separator"></div>
+        <div>
+          <p className="text-sm font-medium text-foreground mb-1">Vehicle</p>
+          <p className="text-sm text-muted-foreground">{trip.vehicle} • Driver: {trip.driver}</p>
+        </div>
         
-        {/* Bottom Section - Team & Logistics */}
-        <div className="flex-1 space-y-1">
-          <div className="trip-card-staff">
-            <span className="font-medium">Wolthers Staff:</span>
-            <span className="ml-1 block truncate">{formatStaffList(trip.staff)}</span>
-          </div>
-          <div className="trip-card-vehicle">
-            <span className="font-medium">Vehicle:</span>
-            <span className="ml-1 truncate">{trip.vehicle} + {trip.driver}</span>
-          </div>
-          <div className="trip-card-cities">
-            <span className="font-medium">Cities:</span>
-            <span className="ml-1 block truncate">{formatCitiesList(trip.cities)}</span>
-          </div>
+        <div>
+          <p className="text-sm font-medium text-foreground mb-1">Cities</p>
+          <p className="text-sm text-muted-foreground">{formatCitiesList(trip.cities)}</p>
         </div>
       </div>
     </div>
@@ -144,9 +162,9 @@ export default function DashboardPage() {
   const pastTrips = trips.filter(trip => trip.type === 'past');
 
   return (
-    <div className="space-y-8">
-      {/* ROW 1: Current & Upcoming Trips */}
-      <div>
+    <div className="p-6 md:px-8 md:py-8">
+      {/* Current & Upcoming Trips */}
+      <div className="mb-12">
         <h2 className="text-2xl font-bold text-foreground mb-6">Current & Upcoming Trips</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {currentTrips.map((trip) => (
@@ -155,12 +173,12 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* ROW 2: Past Trips */}
+      {/* Past Trips */}
       <div>
         <h2 className="text-2xl font-bold text-muted-foreground mb-6">Past Trips</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {pastTrips.map((trip) => (
-            <TripCard key={trip.id} trip={trip} isPast={true} />
+            <TripCard key={trip.id} trip={trip} />
           ))}
         </div>
       </div>
