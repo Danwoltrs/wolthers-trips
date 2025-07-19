@@ -1,5 +1,7 @@
 'use client';
 
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
+
 // Mock trip data with varying content lengths for testing fixed heights
 const trips = [
   {
@@ -69,7 +71,6 @@ const trips = [
   },
 ];
 
-
 function calculateTripDuration(startDate: string, endDate: string) {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -94,13 +95,16 @@ function formatStaffList(staff: string[]) {
 
 function getStatusBadge(status: string) {
   const statusConfig = {
-    in_progress: { label: 'Trip in progress', className: 'bg-green-600 text-white' },
-    scheduled: { label: 'Scheduled', className: 'bg-blue-600 text-white' },
-    to_be_confirmed: { label: 'To be confirmed', className: 'bg-yellow-600 text-white' },
-    completed: { label: 'Completed', className: 'bg-gray-600 text-white' }
+    in_progress: { label: 'Trip in progress', className: 'bg-success text-white' },
+    scheduled: { label: 'Scheduled', className: 'bg-info text-white' },
+    to_be_confirmed: { label: 'To be confirmed', className: 'bg-warning text-white' },
+    completed: { label: 'Completed', className: 'bg-muted text-muted-foreground' }
   };
   
-  const config = statusConfig[status as keyof typeof statusConfig] || { label: status, className: 'bg-gray-500 text-white' };
+  const config = statusConfig[status as keyof typeof statusConfig] || { 
+    label: status, 
+    className: 'bg-muted text-muted-foreground' 
+  };
   
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${config.className}`}>
@@ -118,26 +122,27 @@ function TripCard({ trip }: { trip: any }) {
   });
   
   return (
-    <div className="bg-card rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col h-full">
-      {/* Header with title and status */}
-      <div className="flex items-start justify-between mb-2">
-        <h3 className="text-lg font-semibold text-foreground flex-1 mr-2">{trip.title}</h3>
-        {getStatusBadge(trip.status)}
-      </div>
+    <Card className="hover:shadow-md transition-shadow flex flex-col h-full">
+      <CardHeader className="pb-4">
+        {/* Header with title and status */}
+        <div className="flex items-start justify-between mb-2">
+          <h3 className="text-lg font-semibold text-foreground flex-1 mr-2">{trip.title}</h3>
+          {getStatusBadge(trip.status)}
+        </div>
+        
+        {/* Company name as subtitle */}
+        <p className="text-muted-foreground text-sm mb-4">{trip.client}</p>
+        
+        {/* Trip duration pill and start date */}
+        <div>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent text-accent-foreground">
+            {tripDuration + 1} days
+          </span>
+          <p className="text-sm text-muted-foreground mt-2">Starts {startDate}</p>
+        </div>
+      </CardHeader>
       
-      {/* Company name as subtitle */}
-      <p className="text-muted-foreground text-sm mb-4">{trip.client}</p>
-      
-      {/* Trip duration pill and start date */}
-      <div className="mb-4">
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-600 text-yellow-300">
-          {tripDuration + 1} days
-        </span>
-        <p className="text-sm text-muted-foreground mt-2">Starts {startDate}</p>
-      </div>
-      
-      {/* Card body with staff, vehicle, and cities */}
-      <div className="space-y-3 flex-1">
+      <CardContent className="flex-1 space-y-3 pt-0">
         <div>
           <p className="text-sm font-medium text-foreground mb-1">Wolthers Staff</p>
           <p className="text-sm text-muted-foreground">{formatStaffList(trip.staff)}</p>
@@ -152,8 +157,8 @@ function TripCard({ trip }: { trip: any }) {
           <p className="text-sm font-medium text-foreground mb-1">Cities</p>
           <p className="text-sm text-muted-foreground">{formatCitiesList(trip.cities)}</p>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -162,7 +167,7 @@ export default function DashboardPage() {
   const pastTrips = trips.filter(trip => trip.type === 'past');
 
   return (
-    <div className="p-6 md:px-8 md:py-8">
+    <>
       {/* Current & Upcoming Trips */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold text-foreground mb-6">Current & Upcoming Trips</h2>
@@ -182,6 +187,6 @@ export default function DashboardPage() {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
