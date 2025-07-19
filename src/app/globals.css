@@ -1,3 +1,226 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    /* Radius */
+    --radius: 0.75rem;
+    
+    /* Light theme colors */
+    --background: #ffffff;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --primary: #16a34a;
+    --primary-foreground: #ffffff;
+    --secondary: #f8fafc;
+    --secondary-foreground: #0f172a;
+    --muted: #f8fafc;
+    --muted-foreground: #64748b;
+    --accent: #f1f5f9;
+    --accent-foreground: #0f172a;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #16a34a;
+    --success: #16a34a;
+    --warning: #f59e0b;
+    --destructive: #dc2626;
+    --info: #3b82f6;
+    
+    /* Chart colors */
+    --chart-1: #16a34a;
+    --chart-2: #3b82f6;
+    --chart-3: #f59e0b;
+    --chart-4: #8b5cf6;
+    --chart-5: #ef4444;
+    
+    /* Table colors */
+    --table-header: #f8fafc;
+    --table-row-even: #ffffff;
+    --table-row-odd: #f8fafc;
+    --table-border: #e2e8f0;
+  }
+  
+  .dark {
+    /* Dark theme colors */
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
+    --primary: #22c55e;
+    --primary-foreground: #0f172a;
+    --secondary: #1e293b;
+    --secondary-foreground: #f8fafc;
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+    --accent: #334155;
+    --accent-foreground: #f8fafc;
+    --border: #334155;
+    --input: #334155;
+    --ring: #22c55e;
+    --success: #22c55e;
+    --warning: #fbbf24;
+    --destructive: #f87171;
+    --info: #60a5fa;
+    
+    /* Chart colors for dark mode */
+    --chart-1: #22c55e;
+    --chart-2: #60a5fa;
+    --chart-3: #fbbf24;
+    --chart-4: #a78bfa;
+    --chart-5: #f87171;
+    
+    /* Table colors for dark mode */
+    --table-header: #1e293b;
+    --table-row-even: #0f172a;
+    --table-row-odd: #1e293b;
+    --table-border: #334155;
+  }
+}
+
+/* Smooth theme transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Trip card styling */
+.trip-card {
+  padding: 8px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.trip-card:hover {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  border-color: var(--ring);
+}
+
+.trip-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.trip-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-bottom: 16px;
+}
+
+.trip-card-client {
+  color: var(--muted-foreground);
+  margin-bottom: 8px;
+}
+
+.trip-card-details {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.trip-card-separator {
+  border-top: 1px solid var(--border);
+  margin: 12px 0;
+}
+
+.trip-card-staff {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.trip-card-vehicle {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.trip-card-cities {
+  font-size: 14px;
+  color: #888;
+}
+
+/* Mobile hamburger menu */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  background-color: var(--foreground);
+  margin: 2px 0;
+  transition: 0.3s;
+}
+
+.hamburger-menu.open .hamburger-line:nth-child(1) {
+  transform: rotate(-45deg) translate(-4px, 4px);
+}
+
+.hamburger-menu.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open .hamburger-line:nth-child(3) {
+  transform: rotate(45deg) translate(-4px, -4px);
+}
+
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--background);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  z-index: 50;
+}
+
+.mobile-nav.open {
+  display: block;
+}
+
+.mobile-nav-item {
+  display: block;
+  padding: 12px 16px;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.mobile-nav-item:hover {
+  background-color: var(--accent);
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  .hamburger-menu {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hamburger-menu {
+    display: none !important;
+  }
+  
+  .mobile-nav {
+    display: none !important;
+  }
+}

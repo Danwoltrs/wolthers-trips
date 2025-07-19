@@ -99,15 +99,15 @@ function TripCard({ trip, isPast = false }: { trip: any, isPast?: boolean }) {
   const tripDuration = calculateTripDuration(trip.startDate, trip.endDate);
   
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow h-52 cursor-pointer ${
-      isPast ? 'opacity-60' : 'hover:border-gray-300'
+    <div className={`trip-card h-52 ${
+      isPast ? 'opacity-60' : ''
     }`}>
-      <div className="p-4 h-full flex flex-col">
+      <div className="trip-card-content">
         {/* Top Section - Trip Info */}
         <div className="flex-none">
-          <h3 className="text-lg font-semibold text-gray-900 truncate">{trip.title}</h3>
-          <p className="text-sm text-gray-600 truncate">{trip.client}</p>
-          <p className="text-sm text-gray-500 mt-1">
+          <h3 className="trip-card-title truncate">{trip.title}</h3>
+          <p className="trip-card-client truncate">{trip.client}</p>
+          <p className="trip-card-details">
             {isPast ? (
               `${tripDuration} days completed`
             ) : (
@@ -117,21 +117,21 @@ function TripCard({ trip, isPast = false }: { trip: any, isPast?: boolean }) {
         </div>
         
         {/* Visual Separator */}
-        <div className="border-t border-gray-200 my-3"></div>
+        <div className="trip-card-separator"></div>
         
         {/* Bottom Section - Team & Logistics */}
-        <div className="flex-1 text-sm text-gray-600 space-y-2">
-          <div>
-            <span className="font-medium text-gray-700">Wolthers Staff:</span>
-            <span className="ml-1 truncate block">{formatStaffList(trip.staff)}</span>
+        <div className="flex-1 space-y-1">
+          <div className="trip-card-staff">
+            <span className="font-medium">Wolthers Staff:</span>
+            <span className="ml-1 block truncate">{formatStaffList(trip.staff)}</span>
           </div>
-          <div>
-            <span className="font-medium text-gray-700">Vehicle:</span>
+          <div className="trip-card-vehicle">
+            <span className="font-medium">Vehicle:</span>
             <span className="ml-1 truncate">{trip.vehicle} + {trip.driver}</span>
           </div>
-          <div>
-            <span className="font-medium text-gray-700">Cities:</span>
-            <span className="ml-1 truncate block">{formatCitiesList(trip.cities)}</span>
+          <div className="trip-card-cities">
+            <span className="font-medium">Cities:</span>
+            <span className="ml-1 block truncate">{formatCitiesList(trip.cities)}</span>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* ROW 1: Current & Upcoming Trips */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Current & Upcoming Trips</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-6">Current & Upcoming Trips</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {currentTrips.map((trip) => (
             <TripCard key={trip.id} trip={trip} />
@@ -157,7 +157,7 @@ export default function DashboardPage() {
 
       {/* ROW 2: Past Trips */}
       <div>
-        <h2 className="text-2xl font-bold text-gray-500 mb-6">Past Trips</h2>
+        <h2 className="text-2xl font-bold text-muted-foreground mb-6">Past Trips</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {pastTrips.map((trip) => (
             <TripCard key={trip.id} trip={trip} isPast={true} />
