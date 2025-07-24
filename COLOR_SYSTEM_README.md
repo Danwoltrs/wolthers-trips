@@ -1,316 +1,321 @@
-# Wolthers Travel App - Color System Documentation
+# Styling Documentation - Tailwind Color Codes
 
-## Overview
+## 🎨 Core Color System
 
-This document describes the centralized color scheme system implemented for the Wolthers Travel App using CSS variables and Tailwind CSS integration. The system provides a consistent, theme-aware color palette that works seamlessly across all components.
+### Foundation Colors
+Use these Tailwind classes for all base elements:
+```css
+/* Light Theme */
+bg-neutral-100        /* Background: oklch(0.9500 0.0156 86.4259) */
+text-black            /* Foreground: oklch(0 0 0) */
+bg-neutral-200        /* Muted background: oklch(0.9220 0 0) */
+text-gray-600         /* Muted foreground: oklch(0.5240 0.2080 28.5186) */
 
-## File Structure
-
-```
-src/
-├── styles/
-│   ├── globals.css          # Main color definitions with CSS variables
-│   ├── components.css       # Component-specific styles
-│   └── utilities.css        # Utility classes
-├── components/
-│   ├── theme-provider.tsx   # Theme management context
-│   ├── theme-toggle.tsx     # Theme switching components
-│   └── color-demo.tsx       # Color system demonstration
-└── app/
-    ├── layout.tsx           # Root layout with theme provider
-    └── test-page/
-        └── page.tsx         # Updated to use new color system
+/* Dark Theme */
+bg-slate-800          /* Background: oklch(0.2407 0.0083 240.2250) */
+text-slate-200        /* Foreground: oklch(0.7595 0.0107 238.5621) */
+bg-slate-700          /* Muted background: oklch(0.2926 0.0159 240.3354) */
+text-slate-400        /* Muted foreground: oklch(0.6107 0.0824 238.9684) */
 ```
 
-## Color Variables
-
-### Primary Colors
-- `--primary`: Main brand color - `oklch(0.4293 0.0597 164.4252)`
-- `--primary-foreground`: Text on primary background - `oklch(0.9895 0.0090 78.2827)`
-- `--secondary`: Secondary color - `oklch(1.0000 0 0)`
-- `--secondary-foreground`: Text on secondary background - `oklch(0.4298 0.0589 164.0275)`
-
-### Background Colors
-- `--background`: Main background - `oklch(0.9500 0.0156 86.4259)`
-- `--foreground`: Main text color - `oklch(0 0 0)`
-- `--card`: Card background - `oklch(1 0 0)`
-- `--card-foreground`: Text on cards - `oklch(0.1450 0 0)`
+### Primary Palette
+Main brand colors for buttons, links, and primary actions:
+```css
+bg-green-600         /* Primary: oklch(0.4166 0.0697 152.1075) */
+text-white           /* Primary foreground: oklch(1 0 0) */
+bg-neutral-200       /* Secondary: oklch(0.9220 0 0) */
+text-gray-900        /* Secondary foreground: oklch(0.2050 0 0) */
+```
 
 ### Accent Colors
-- `--accent`: Accent color - `oklch(0.7882 0.0642 76.1505)`
-- `--accent-foreground`: Text on accent background - `oklch(0 0 0)`
-- `--muted`: Muted background - `oklch(0.9700 0 0)`
-- `--muted-foreground`: Muted text - `oklch(0.5560 0 0)`
-
-### Functional Colors
-- `--destructive`: Error/danger color - `oklch(0.5770 0.2450 27.3250)`
-- `--destructive-foreground`: Text on destructive background - `oklch(1 0 0)`
-- `--border`: Border color - `oklch(0.9220 0 0)`
-- `--input`: Input field background - `oklch(0.9220 0 0)`
-- `--ring`: Focus ring color - `oklch(0.7080 0 0)`
-
-### Chart Colors
-- `--chart-1`: Chart color 1 - `oklch(0.4166 0.0697 152.1075)`
-- `--chart-2`: Chart color 2 - `oklch(0.6539 0.1132 151.7077)`
-- `--chart-3`: Chart color 3 - `oklch(0.8343 0.1055 152.9098)`
-- `--chart-4`: Chart color 4 - `oklch(0.9486 0.0717 154.6254)`
-- `--chart-5`: Chart color 5 - `oklch(0.9906 0.0139 155.5988)`
-
-### Sidebar Colors
-- `--sidebar`: Sidebar background - `oklch(0.9850 0 0)`
-- `--sidebar-foreground`: Sidebar text - `oklch(0.5240 0.2080 28.5186)`
-- `--sidebar-primary`: Sidebar primary color - `oklch(0.2050 0 0)`
-- `--sidebar-primary-foreground`: Text on sidebar primary - `oklch(0.9850 0 0)`
-- `--sidebar-accent`: Sidebar accent - `oklch(0.9700 0 0)`
-- `--sidebar-accent-foreground`: Text on sidebar accent - `oklch(0.2050 0 0)`
-- `--sidebar-border`: Sidebar border - `oklch(0.9220 0 0)`
-- `--sidebar-ring`: Sidebar focus ring - `oklch(0.7080 0 0)`
-
-## Dark Mode Support
-
-The system includes a complete dark mode implementation with automatic theme detection:
-
-### Dark Mode Colors
-All colors have dark mode variants defined in the `.dark` class, maintaining the same variable names but with different OKLCH values optimized for dark backgrounds.
-
-### Theme Provider
-```tsx
-import { ThemeProvider } from '@/components/theme-provider'
-
-// In your app layout
-<ThemeProvider defaultTheme="system" storageKey="wolthers-travel-theme">
-  {children}
-</ThemeProvider>
+For highlights, hover states, and secondary elements:
+```css
+bg-neutral-100      /* Accent: oklch(0.9700 0 0) */
+text-gray-900       /* Accent foreground: oklch(0.2050 0 0) */
 ```
 
-### Theme Toggle
-```tsx
-import { ThemeToggle } from '@/components/theme-toggle'
-
-// Usage
-<ThemeToggle />          // With text label
-<ThemeToggleIcon />      // Icon only
+### Card System
+For content containers and surfaces:
+```css
+bg-white            /* Card background: oklch(1 0 0) */
+text-gray-900       /* Card foreground: oklch(0.2050 0 0) */
+border-gray-200     /* Card border: oklch(0.9220 0 0) */
 ```
 
-## Tailwind CSS Integration
+## 🚨 Status Colors
 
-The color system is fully integrated with Tailwind CSS:
+### Destructive/Error States
+```css
+bg-red-600          /* Destructive: oklch(0.5762 0.2332 27.3288) */
+text-white          /* Destructive foreground: oklch(1 0 0) */
+```
 
+### Informational States
+```css
+bg-cyan-600         /* Info: oklch(0.6539 0.1132 151.7077) */
+text-white          /* Info foreground: oklch(1 0 0) */
+```
+
+### Success States
+```css
+bg-green-700        /* Success: oklch(0.4166 0.0697 152.1075) */
+text-white          /* Success foreground: oklch(1 0 0) */
+```
+
+### Warning States
+```css
+bg-yellow-400       /* Warning: oklch(0.8343 0.1055 152.9098) */
+text-black          /* Warning foreground: oklch(0 0 0) */
+```
+
+## 📊 Data Visualization
+
+### Chart Color Palette
+```css
+/* 5-Color Chart System */
+bg-green-700       /* Chart 1: oklch(0.4166 0.0697 152.1075) */
+bg-cyan-600        /* Chart 2: oklch(0.6539 0.1132 151.7077) */
+bg-yellow-400      /* Chart 3: oklch(0.8343 0.1055 152.9098) */
+bg-yellow-200      /* Chart 4: oklch(0.9486 0.0717 154.6254) */
+bg-yellow-50       /* Chart 5: oklch(0.9906 0.0139 155.5988) */
+```
+Usage Guidelines
+- Chart 1-2: Primary data series (revenue, trips)
+- Chart 3-4: Secondary metrics (costs, time)
+- Chart 5: Accent data or highlights
+
+## 🧭 Navigation Colors
+
+### Sidebar System
+```css
+/* Sidebar Layout */
+bg-neutral-50       /* Sidebar background: oklch(0.9850 0 0) */
+text-gray-600       /* Sidebar text: oklch(0.5240 0.2080 28.5186) */
+
+/* Navigation States */
+bg-gray-900         /* Active nav item: oklch(0.2050 0 0) */
+text-neutral-50     /* Active nav text: oklch(0.9850 0 0) */
+bg-neutral-200      /* Hover nav item: oklch(0.9700 0 0) */
+text-gray-900       /* Hover nav text: oklch(0.2050 0 0) */
+
+/* Navigation Border */
+border-gray-300     /* Sidebar borders: oklch(0.9220 0 0) */
+ring-gray-500       /* Focus ring: oklch(0.7080 0 0) */
+```
+
+## 🎯 Component Classes
+
+### Button Variants
+```css
+/* Primary Button */
+bg-green-600 hover:bg-green-700 text-white
+
+/* Secondary Button */
+bg-neutral-200 hover:bg-neutral-300 text-gray-900
+
+/* Destructive Button */
+bg-red-600 hover:bg-red-700 text-white
+
+/* Ghost Button */
+hover:bg-neutral-100 text-gray-900
+
+/* Outline Button */
+border border-gray-300 hover:bg-neutral-100 text-gray-900
+```
+
+### Badge Variants
+```css
+/* Default Badge */
+bg-neutral-200 text-gray-900
+
+/* Success Badge */
+bg-green-100 text-green-800
+
+/* Warning Badge */
+bg-yellow-100 text-yellow-800
+
+/* Error Badge */
+bg-red-100 text-red-800
+
+/* Info Badge */
+bg-cyan-100 text-cyan-800
+```
+
+### Input States
+```css
+/* Default Input */
+border-gray-300 focus:border-green-600 focus:ring-green-600
+
+/* Error Input */
+border-red-500 focus:border-red-500 focus:ring-red-500
+
+/* Success Input */
+border-green-500 focus:border-green-500 focus:ring-green-500
+```
+
+## 📱 Responsive Design Classes
+
+### Container System
+```css
+/* Max widths */
+max-w-sm     /* 384px */
+max-w-md     /* 448px */
+max-w-lg     /* 512px */
+max-w-xl     /* 576px */
+max-w-2xl    /* 672px */
+max-w-4xl    /* 896px */
+max-w-6xl    /* 1152px */
+max-w-7xl    /* 1280px */
+```
+
+### Breakpoint Usage
+```css
+/* Mobile First */
+class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
+
+/* Sidebar Responsive */
+class="hidden md:block md:w-64 lg:w-72"
+
+/* Navigation Responsive */
+class="block md:hidden" /* Mobile menu toggle */
+class="hidden md:block" /* Desktop navigation */
+```
+
+## 🔧 Tailwind Configuration
+
+### Custom Colors Setup
 ```javascript
-// tailwind.config.ts
-export default {
-  darkMode: 'class',
+// tailwind.config.js
+module.exports = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
         primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
+          DEFAULT: '#16a34a', // green-600
+          foreground: '#ffffff'
         },
-        // ... all other colors
-      },
-    },
-  },
+        secondary: {
+          DEFAULT: '#e5e5e5', // neutral-200
+          foreground: '#171717'  // gray-900
+        },
+        accent: {
+          DEFAULT: '#f5f5f5', // neutral-100
+          foreground: '#171717'
+        },
+        destructive: {
+          DEFAULT: '#dc2626', // red-600
+          foreground: '#ffffff'
+        },
+        success: {
+          DEFAULT: '#059669', // green-600
+          foreground: '#ffffff'
+        },
+        warning: {
+          DEFAULT: '#fbbf24', // yellow-400
+          foreground: '#000000'
+        },
+        info: {
+          DEFAULT: '#0891b2', // cyan-600
+          foreground: '#ffffff'
+        }
+      }
+    }
+  }
 }
 ```
 
-## Usage Examples
+### Component Utility Classes
+```css
+/* Card Components */
+.card {
+  @apply bg-white border border-gray-200 rounded-lg shadow-sm;
+}
 
-### Using Tailwind Classes
-```tsx
-<div className="bg-primary text-primary-foreground">
-  Primary button
-</div>
+.card-header {
+  @apply px-6 py-4 border-b border-gray-200;
+}
 
-<div className="bg-card text-card-foreground border border-border">
-  Card content
-</div>
+.card-content {
+  @apply px-6 py-4;
+}
+
+.card-footer {
+  @apply px-6 py-4 border-t border-gray-200;
+}
+
+/* Button Components */
+.btn {
+  @apply px-4 py-2 rounded-md font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply btn bg-green-600 hover:bg-green-700 text-white;
+}
+
+.btn-secondary {
+  @apply btn bg-neutral-200 hover:bg-neutral-300 text-gray-900;
+}
+
+.btn-destructive {
+  @apply btn bg-red-600 hover:bg-red-700 text-white;
+}
 ```
 
-### Using Component Classes
-```tsx
-<button className="btn btn-primary">
-  Primary Button
-</button>
+## 🎨 Theme Implementation
 
-<div className="card">
-  <div className="card-header">
-    <h3 className="card-title">Card Title</h3>
+### Dark Mode Classes
+Add `dark:` prefix to all classes for dark mode variants:
+```css
+/* Example: Card in light and dark mode */
+bg-white dark:bg-slate-800 
+text-gray-900 dark:text-slate-200 
+border-gray-200 dark:border-slate-700
+```
+
+### Theme Toggle Button
+```css
+bg-neutral-100 hover:bg-neutral-200 
+dark:bg-slate-700 dark:hover:bg-slate-600 
+text-gray-900 dark:text-slate-200
+```
+
+## 📋 Usage Examples
+
+### Dashboard Card
+```html
+<div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm">
+  <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-200">Trip Details</h3>
   </div>
-  <div className="card-content">
-    Card content
+  <div class="px-6 py-4">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+      Pending
+    </span>
   </div>
 </div>
 ```
 
-### Using CSS Variables Directly
-```css
-.custom-component {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  border: 1px solid var(--border);
-}
+### Navigation Item
+```html
+<a class="flex items-center px-4 py-2 text-gray-600 hover:bg-neutral-100 hover:text-gray-900 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-slate-200 rounded-md transition-colors">
+  Dashboard
+</a>
 ```
 
-## Component Styles
-
-### Button Variants
-- `.btn-primary`: Primary button style
-- `.btn-secondary`: Secondary button style
-- `.btn-outline`: Outline button style
-- `.btn-ghost`: Ghost button style
-- `.btn-destructive`: Destructive button style
-- `.btn-link`: Link button style
-
-### Button Sizes
-- `.btn-sm`: Small button
-- `.btn-lg`: Large button
-- `.btn-icon`: Icon-only button
-
-### Card Components
-- `.card`: Base card component
-- `.card-header`: Card header
-- `.card-title`: Card title
-- `.card-description`: Card description
-- `.card-content`: Card content
-- `.card-footer`: Card footer
-
-### Form Components
-- `.form-group`: Form group wrapper
-- `.form-label`: Form label
-- `.form-description`: Form description
-- `.form-error`: Form error message
-- `.input`: Input field style
-
-### Status Badges
-- `.badge-default`: Default badge
-- `.badge-secondary`: Secondary badge
-- `.badge-destructive`: Destructive badge
-- `.badge-outline`: Outline badge
-- `.badge-pending`: Pending status
-- `.badge-approved`: Approved status
-- `.badge-rejected`: Rejected status
-
-### Travel-Specific Components
-- `.trip-card`: Trip card component
-- `.expense-item`: Expense list item
-- `.expense-category`: Expense category text
-- `.expense-amount`: Expense amount display
-- `.expense-date`: Expense date display
-
-## Utility Classes
-
-### Background Colors
-```css
-.bg-primary { background-color: var(--primary); }
-.bg-secondary { background-color: var(--secondary); }
-.bg-accent { background-color: var(--accent); }
-/* ... etc */
+### Form Input
+```html
+<input class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-200 focus:border-green-600 focus:ring-1 focus:ring-green-600">
 ```
 
-### Text Colors
-```css
-.text-primary { color: var(--primary); }
-.text-secondary { color: var(--secondary); }
-.text-muted-foreground { color: var(--muted-foreground); }
-/* ... etc */
+## 🔄 Migration Notes
+Replace all instances of CSS variables with these Tailwind classes:
+```
+var(--primary) → bg-green-600
+var(--background) → bg-neutral-100 dark:bg-slate-800
+var(--foreground) → text-black dark:text-slate-200
+var(--muted) → bg-neutral-200 dark:bg-slate-700
+var(--card) → bg-white dark:bg-slate-800
+var(--border) → border-gray-200 dark:border-slate-700
 ```
 
-### Border Colors
-```css
-.border-primary { border-color: var(--primary); }
-.border-input { border-color: var(--input); }
-.border-border { border-color: var(--border); }
-/* ... etc */
-```
-
-### Shadows
-```css
-.shadow-sm { box-shadow: var(--shadow-sm); }
-.shadow-md { box-shadow: var(--shadow-md); }
-.shadow-lg { box-shadow: var(--shadow-lg); }
-/* ... etc */
-```
-
-## Best Practices
-
-### 1. Use Semantic Color Names
-```tsx
-// Good
-<div className="bg-primary text-primary-foreground">
-
-// Avoid
-<div className="bg-blue-500 text-white">
-```
-
-### 2. Prefer Component Classes
-```tsx
-// Good
-<button className="btn btn-primary">
-
-// Acceptable
-<button className="bg-primary text-primary-foreground px-4 py-2 rounded">
-```
-
-### 3. Use CSS Variables for Custom Components
-```css
-.custom-alert {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
-  border: 1px solid var(--border);
-}
-```
-
-### 4. Leverage Opacity Modifiers
-```tsx
-<div className="bg-primary/10 border-primary/20">
-  Subtle primary background
-</div>
-```
-
-## Testing the Color System
-
-Visit `/test-page` and click "View Color System" to see a comprehensive demonstration of:
-- All color variables in action
-- Light/dark theme switching
-- Component examples
-- Form elements
-- Travel-specific components
-- Button variants and states
-
-## Customization
-
-To customize colors:
-
-1. **Modify CSS Variables**: Edit the OKLCH values in `src/styles/globals.css`
-2. **Update Tailwind Config**: Ensure new colors are mapped in `tailwind.config.ts`
-3. **Add New Utilities**: Create new utility classes in `src/styles/utilities.css`
-4. **Create Component Styles**: Add new component styles in `src/styles/components.css`
-
-## Browser Support
-
-The color system uses:
-- **CSS Variables**: Supported in all modern browsers
-- **OKLCH Colors**: Supported in modern browsers (Chrome 111+, Firefox 113+, Safari 15.4+)
-- **Tailwind CSS**: Full browser support with PostCSS processing
-
-## Migration Guide
-
-### From Old Color System
-1. Replace hardcoded colors with CSS variables
-2. Update class names to use semantic naming
-3. Test in both light and dark modes
-4. Update any custom CSS to use the new variables
-
-### Example Migration
-```tsx
-// Before
-<div className="bg-blue-500 text-white border-gray-300">
-
-// After
-<div className="bg-primary text-primary-foreground border-border">
-```
-
-This centralized color system ensures consistency, maintainability, and accessibility across the entire Wolthers Travel App.
+This ensures consistent styling across the entire application while maintaining the established design system.

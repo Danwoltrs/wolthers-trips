@@ -12,7 +12,7 @@
 **Estimated Time**: 4-6 hours  
 **Status**: PENDING
 
-**Description**: Create the core dashboard layout with protected routes, navigation sidebar, and header components using the established OKLCH color system.
+**Description**: Create the core dashboard layout with protected routes, navigation sidebar, and header components using the established Tailwind color system.
 
 **Requirements**:
 1. Create `app/(dashboard)/layout.tsx` with protected route wrapper
@@ -50,7 +50,7 @@ src/hooks/
 **Implementation Notes**:
 - Use `useAuth()` hook for authentication state
 - Reference `docs/modules/dashboard.md` for navigation structure
-- All styling must use the OKLCH color system
+- All styling must use the Tailwind color system
 - Ensure accessibility with proper ARIA labels
 - Test with different user roles
 

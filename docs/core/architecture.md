@@ -6,7 +6,7 @@
 - **Next.js 14+** with App Router for both frontend and backend
 - **TypeScript** throughout the entire application
 - **Supabase** as primary backend (PostgreSQL + Auth + Storage + Real-time)
-- **Tailwind CSS** for styling with centralized OKLCH color system
+- **Tailwind CSS** for styling with centralized color system
 - **React** for component-based UI development
 
 ### Libraries & Services
@@ -123,7 +123,7 @@ documents/          # Trip documents, presentations (100MB limit, private)
 
 ## 🎨 Design System
 
-### OKLCH Color System
+### Tailwind Color System
 - **Consistent theming** across light/dark modes
 - **CSS variables** for dynamic color management
 - **Tailwind integration** for utility-first styling

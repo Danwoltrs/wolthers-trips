@@ -8,7 +8,7 @@ Create the core dashboard layout system for the Wolthers Travel Management App w
 - Responsive sidebar navigation with role-based menu items (Admin, Manager, User, Client)
 - Header component with theme toggle (light/dark), user dropdown, and notifications
 - Mobile-first responsive design that works on phone, tablet, and desktop
-- Integration with existing OKLCH color system using CSS variables
+- Integration with existing Tailwind color system using CSS variables
 - Proper TypeScript types and Zod validation
 - Accessibility compliance (WCAG 2.1 AA)
 - Real-time updates and state management with Zustand
@@ -56,7 +56,7 @@ Essential documentation to reference during implementation:
 ### Core Architecture (docs/core/)
 - `docs/core/architecture.md` - Complete tech stack and implementation patterns
 - `docs/core/database-documentation.md` - Full database schema including user roles table
-- `docs/core/color_system.md` - OKLCH color system implementation and usage
+- `docs/core/color_system.md` - Tailwind color system implementation and usage
 - `docs/core/deployment.md` - Environment variables and deployment configuration
 - `docs/core/readme.md` - Core documentation overview
 
@@ -80,7 +80,7 @@ Essential documentation to reference during implementation:
 ### Current Implementation Status
 - Database schema: ✅ Implemented and tested (see `docs/core/database-documentation.md`)
 - Authentication system: ✅ Basic auth ready, needs dashboard integration
-- Color system: ✅ Complete OKLCH system with CSS variables (see `docs/core/color_system.md`)
+- Color system: ✅ Complete Tailwind system with CSS variables (see `docs/core/color_system.md`)
 - Environment: ✅ All variables configured and working (see `docs/core/deployment.md`)
 - Task tracking: ✅ Current tasks defined in `task.md`
 
