@@ -13,7 +13,7 @@ This is a full-stack travel management application designed for **Wolthers & Ass
 - **🤖 AI-Powered Features** - Receipt OCR, trip summarization, and intelligent suggestions
 - **🚗 Fleet Management** - Vehicle tracking with AI dashboard photo processing
 - **💰 Finance Integration** - Automated reimbursements and client billing
-- **🎨 Modern UI/UX** - OKLCH color system with light/dark theme support
+- **🎨 Modern UI/UX** - Tailwind color system with light/dark theme support
 - **📱 Responsive Design** - Mobile-first approach with full accessibility
 - **🔄 Real-time Updates** - Supabase real-time subscriptions
 - **📊 Advanced Analytics** - Data visualization and reporting
@@ -23,7 +23,7 @@ This is a full-stack travel management application designed for **Wolthers & Ass
 ### Frontend
 - **Next.js 15+** with App Router and TypeScript
 - **React 18+** for component-based UI development
-- **Tailwind CSS** with centralized OKLCH color system
+- **Tailwind CSS** with centralized color system
 - **Zustand** for client-side state management
 - **React Query** for server state management and caching
 
@@ -143,8 +143,8 @@ The application uses a comprehensive PostgreSQL schema with 14+ core tables:
 
 ## 🎨 Design System
 
-### OKLCH Color System
-The application implements a comprehensive color system using exact OKLCH values for consistent, theme-aware design:
+### Tailwind Color System
+The application implements a comprehensive color system using Tailwind color classes for consistent, theme-aware design:
 
 
 ### Theme Features
@@ -256,7 +256,7 @@ Visit `/test-page` → "View Color System" to explore the complete color system 
 ### Current Status
 - ✅ **Database Schema** - Fully implemented and tested
 - ✅ **Storage Buckets** - Created and configured
-- ✅ **Color System** - Complete OKLCH-based theme system
+- ✅ **Color System** - Complete Tailwind-based theme system
 - ✅ **Authentication** - Multi-method login ready
 - ✅ **Environment Variables** - Configured for development
 - ✅ **Connection Testing** - Health checks and monitoring

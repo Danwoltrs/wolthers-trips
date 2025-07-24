@@ -18,7 +18,7 @@ This is a comprehensive travel itinerary management web application for Wolthers
 - **Supabase** as primary backend (PostgreSQL + Auth + Storage + Real-time)
 - **Tailwind CSS** for styling with centralized color system and dark/light mode support
 - **React** for component-based UI development
-- **OKLCH Color System** for consistent theme-aware design
+- **Tailwind Color System** for consistent theme-aware design
 
 ### Core Libraries & Services
 - **NextAuth.js** for authentication (Microsoft OAuth + Email OTP)
@@ -522,8 +522,8 @@ interface TripBranching {
 
 ## 🎨 Color System & Design
 
-### Centralized OKLCH Color System
-The application uses a comprehensive color system based on exact OKLCH values for consistent, theme-aware design:
+### Centralized Tailwind Color System
+The application uses a comprehensive color system based on Tailwind classes for consistent, theme-aware design:
 
 ```css
 /* Primary Colors */
@@ -592,7 +592,7 @@ The application uses a comprehensive color system based on exact OKLCH values fo
 - ✅ **Storage buckets** - Created and configured
 - ✅ **Basic authentication** - Ready for implementation
 - ✅ **Environment variables** - Configured for development
-- ✅ **Color system** - Complete OKLCH-based theme system
+- ✅ **Color system** - Complete Tailwind-based theme system
 - ✅ **Connection testing** - Test page created and working
 - ⏳ **Core features** - Ready for development
 

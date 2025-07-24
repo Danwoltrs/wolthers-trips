@@ -1,477 +1,321 @@
-# OKLCH Color System Documentation
+# Styling Documentation - Tailwind Color Codes
 
-## 🎨 Overview
-The Wolthers Travel App uses a comprehensive OKLCH-based color system for consistent, theme-aware design across all components. This system provides automatic light/dark mode support with precise color definitions.
+## 🎨 Core Color System
 
-## 🌈 Color Philosophy
-
-### Why OKLCH?
-- **Perceptually uniform** - Colors that look equally bright actually are
-- **Future-proof** - Wide gamut support for modern displays
-- **Precise control** - Mathematical color relationships
-- **Accessibility** - Predictable contrast ratios
-- **Theme consistency** - Smooth transitions between light/dark modes
-
-## 🎯 Core Color Palette
-
-### Primary Brand Colors
+### Foundation Colors
+Use these Tailwind classes for all base elements:
 ```css
-/* Wolthers Brand Green */
---primary: oklch(0.4293 0.0597 164.4252);           /* Main brand color */
---primary-foreground: oklch(0.9895 0.0090 78.2827); /* Text on primary */
+/* Light Theme */
+bg-neutral-100        /* Background: oklch(0.9500 0.0156 86.4259) */
+text-black            /* Foreground: oklch(0 0 0) */
+bg-neutral-200        /* Muted background: oklch(0.9220 0 0) */
+text-gray-600         /* Muted foreground: oklch(0.5240 0.2080 28.5186) */
 
-/* Clean Secondary */
---secondary: oklch(1.0000 0 0);                      /* Pure white */
---secondary-foreground: oklch(0.4298 0.0589 164.0275); /* Green on white */
+/* Dark Theme */
+bg-slate-800          /* Background: oklch(0.2407 0.0083 240.2250) */
+text-slate-200        /* Foreground: oklch(0.7595 0.0107 238.5621) */
+bg-slate-700          /* Muted background: oklch(0.2926 0.0159 240.3354) */
+text-slate-400        /* Muted foreground: oklch(0.6107 0.0824 238.9684) */
 ```
 
-### Layout & Background Colors
+### Primary Palette
+Main brand colors for buttons, links, and primary actions:
 ```css
-/* App Structure */
---background: oklch(0.9500 0.0156 86.4259);         /* Main app background */
---foreground: oklch(0 0 0);                         /* Primary text color */
-
-/* Card System */
---card: oklch(1 0 0);                               /* Card backgrounds */
---card-foreground: oklch(0.1450 0 0);               /* Card text */
-
-/* Borders & Inputs */
---border: oklch(0.9220 0 0);                        /* Standard borders */
---input: oklch(0.9220 0 0);                         /* Input backgrounds */
---ring: oklch(0.7080 0 0);                          /* Focus rings */
+bg-green-600         /* Primary: oklch(0.4166 0.0697 152.1075) */
+text-white           /* Primary foreground: oklch(1 0 0) */
+bg-neutral-200       /* Secondary: oklch(0.9220 0 0) */
+text-gray-900        /* Secondary foreground: oklch(0.2050 0 0) */
 ```
 
-### Interactive & State Colors
+### Accent Colors
+For highlights, hover states, and secondary elements:
 ```css
-/* Interactive Elements */
---accent: oklch(0.7882 0.0642 76.1505);             /* Hover states */
---accent-foreground: oklch(0 0 0);                  /* Text on accent */
-
-/* Subtle Elements */
---muted: oklch(0.9700 0 0);                         /* Muted backgrounds */
---muted-foreground: oklch(0.5560 0 0);              /* Muted text */
-
-/* Destructive Actions */
---destructive: oklch(0.5770 0.2450 27.3250);        /* Error/delete states */
---destructive-foreground: oklch(1 0 0);             /* Text on destructive */
-
-/* Informational */
---info: oklch(0.6539 0.1132 151.7077);              /* Info states */
---info-foreground: oklch(1 0 0);                    /* Text on info */
-
-/* Success States */
---success: oklch(0.4166 0.0697 152.1075);           /* Success states */
---success-foreground: oklch(1 0 0);                 /* Text on success */
-
-/* Warning States */
---warning: oklch(0.8343 0.1055 152.9098);           /* Warning states */
---warning-foreground: oklch(0 0 0);                 /* Text on warning */
+bg-neutral-100      /* Accent: oklch(0.9700 0 0) */
+text-gray-900       /* Accent foreground: oklch(0.2050 0 0) */
 ```
 
-## 📊 Data Visualization Colors
+### Card System
+For content containers and surfaces:
+```css
+bg-white            /* Card background: oklch(1 0 0) */
+text-gray-900       /* Card foreground: oklch(0.2050 0 0) */
+border-gray-200     /* Card border: oklch(0.9220 0 0) */
+```
+
+## 🚨 Status Colors
+
+### Destructive/Error States
+```css
+bg-red-600          /* Destructive: oklch(0.5762 0.2332 27.3288) */
+text-white          /* Destructive foreground: oklch(1 0 0) */
+```
+
+### Informational States
+```css
+bg-cyan-600         /* Info: oklch(0.6539 0.1132 151.7077) */
+text-white          /* Info foreground: oklch(1 0 0) */
+```
+
+### Success States
+```css
+bg-green-700        /* Success: oklch(0.4166 0.0697 152.1075) */
+text-white          /* Success foreground: oklch(1 0 0) */
+```
+
+### Warning States
+```css
+bg-yellow-400       /* Warning: oklch(0.8343 0.1055 152.9098) */
+text-black          /* Warning foreground: oklch(0 0 0) */
+```
+
+## 📊 Data Visualization
 
 ### Chart Color Palette
 ```css
 /* 5-Color Chart System */
---chart-1: oklch(0.4166 0.0697 152.1075);          /* Primary chart color */
---chart-2: oklch(0.6539 0.1132 151.7077);          /* Secondary chart color */
---chart-3: oklch(0.8343 0.1055 152.9098);          /* Tertiary chart color */
---chart-4: oklch(0.9486 0.0717 154.6254);          /* Quaternary chart color */
---chart-5: oklch(0.9906 0.0139 155.5988);          /* Quinary chart color */
+bg-green-700       /* Chart 1: oklch(0.4166 0.0697 152.1075) */
+bg-cyan-600        /* Chart 2: oklch(0.6539 0.1132 151.7077) */
+bg-yellow-400      /* Chart 3: oklch(0.8343 0.1055 152.9098) */
+bg-yellow-200      /* Chart 4: oklch(0.9486 0.0717 154.6254) */
+bg-yellow-50       /* Chart 5: oklch(0.9906 0.0139 155.5988) */
 ```
-
-### Usage Guidelines
-- **Chart 1-2**: Primary data series (revenue, trips)
-- **Chart 3-4**: Secondary metrics (costs, time)
-- **Chart 5**: Accent data or highlights
+Usage Guidelines
+- Chart 1-2: Primary data series (revenue, trips)
+- Chart 3-4: Secondary metrics (costs, time)
+- Chart 5: Accent data or highlights
 
 ## 🧭 Navigation Colors
 
 ### Sidebar System
 ```css
 /* Sidebar Layout */
---sidebar: oklch(0.9850 0 0);                       /* Sidebar background */
---sidebar-foreground: oklch(0.5240 0.2080 28.5186); /* Sidebar text */
+bg-neutral-50       /* Sidebar background: oklch(0.9850 0 0) */
+text-gray-600       /* Sidebar text: oklch(0.5240 0.2080 28.5186) */
 
 /* Navigation States */
---sidebar-primary: oklch(0.2050 0 0);               /* Active nav item */
---sidebar-primary-foreground: oklch(0.9850 0 0);   /* Active nav text */
---sidebar-accent: oklch(0.9700 0 0);                /* Hover nav item */
---sidebar-accent-foreground: oklch(0.2050 0 0);    /* Hover nav text */
+bg-gray-900         /* Active nav item: oklch(0.2050 0 0) */
+text-neutral-50     /* Active nav text: oklch(0.9850 0 0) */
+bg-neutral-200      /* Hover nav item: oklch(0.9700 0 0) */
+text-gray-900       /* Hover nav text: oklch(0.2050 0 0) */
 
 /* Navigation Border */
---sidebar-border: oklch(0.9220 0 0);                /* Sidebar borders */
---sidebar-ring: oklch(0.7080 0 0);                  /* Focus indicators */
+border-gray-300     /* Sidebar borders: oklch(0.9220 0 0) */
+ring-gray-500       /* Focus ring: oklch(0.7080 0 0) */
 ```
 
-## 🌙 Dark Mode Implementation
-
-### Dark Theme Colors
-```css
-.dark {
-  /* Background System */
-  --background: oklch(0.2407 0.0083 240.2250);      /* Dark background */
-  --foreground: oklch(0.7595 0.0107 238.5621);      /* Light text */
-  
-  /* Card System */
-  --card: oklch(0.2236 0.0084 240.2744);            /* Dark cards */
-  --card-foreground: oklch(0.9851 0 0);             /* Light card text */
-  
-  /* Interactive Elements */
-  --accent: oklch(0.3920 0.0890 240.9447);          /* Dark mode accent */
-  --accent-foreground: oklch(0.9851 0 0);           /* Light accent text */
-  
-  /* Muted Elements */
-  --muted: oklch(0.2236 0.0084 240.2744);           /* Dark muted bg */
-  --muted-foreground: oklch(0.5240 0.0189 240.9447); /* Muted text */
-  
-  /* Borders & Inputs */
-  --border: oklch(0.2236 0.0084 240.2744);          /* Dark borders */
-  --input: oklch(0.2236 0.0084 240.2744);           /* Dark inputs */
-  --ring: oklch(0.4298 0.0589 164.0275);            /* Focus rings */
-  
-  /* Sidebar Dark Mode */
-  --sidebar: oklch(0.1804 0.0090 240.9447);         /* Dark sidebar */
-  --sidebar-foreground: oklch(0.8444 0.0189 240.9447); /* Light sidebar text */
-  --sidebar-accent: oklch(0.2236 0.0084 240.2744);  /* Dark hover */
-  --sidebar-accent-foreground: oklch(0.9851 0 0);   /* Light hover text */
-}
-```
-
-## ⚙️ Theme Management System
-
-### Theme Provider Implementation
-```typescript
-// Theme context and provider
-interface ThemeContextType {
-  theme: 'light' | 'dark' | 'system';
-  setTheme: (theme: 'light' | 'dark' | 'system') => void;
-  resolvedTheme: 'light' | 'dark';
-}
-
-// Theme persistence
-const THEME_STORAGE_KEY = 'wolthers-travel-theme';
-
-// System preference detection
-const getSystemTheme = (): 'light' | 'dark' => {
-  if (typeof window !== 'undefined') {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  return 'light';
-};
-```
-
-### Theme Toggle Component
-```tsx
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  
-  return (
-    <button
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      className="inline-flex items-center justify-center rounded-md text-sm font-medium 
-                 transition-colors focus-visible:outline-none focus-visible:ring-2 
-                 focus-visible:ring-ring focus-visible:ring-offset-2 
-                 disabled:opacity-50 disabled:pointer-events-none 
-                 ring-offset-background hover:bg-accent hover:text-accent-foreground 
-                 h-10 w-10"
-    >
-      <SunIcon className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <MoonIcon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-      <span className="sr-only">Toggle theme</span>
-    </button>
-  );
-}
-```
-
-## 🎨 Component Color Usage
+## 🎯 Component Classes
 
 ### Button Variants
 ```css
 /* Primary Button */
-.btn-primary {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-}
-
-.btn-primary:hover {
-  background-color: oklch(from var(--primary) calc(l - 0.1) c h);
-}
+bg-green-600 hover:bg-green-700 text-white
 
 /* Secondary Button */
-.btn-secondary {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
-  border: 1px solid var(--border);
-}
+bg-neutral-200 hover:bg-neutral-300 text-gray-900
 
 /* Destructive Button */
-.btn-destructive {
-  background-color: var(--destructive);
-  color: var(--destructive-foreground);
-}
+bg-red-600 hover:bg-red-700 text-white
 
 /* Ghost Button */
-.btn-ghost {
-  background-color: transparent;
-  color: var(--foreground);
-}
+hover:bg-neutral-100 text-gray-900
 
-.btn-ghost:hover {
-  background-color: var(--accent);
-  color: var(--accent-foreground);
-}
+/* Outline Button */
+border border-gray-300 hover:bg-neutral-100 text-gray-900
 ```
 
-### Card Components
+### Badge Variants
 ```css
-/* Standard Card */
-.card {
-  background-color: var(--card);
-  color: var(--card-foreground);
-  border: 1px solid var(--border);
-  border-radius: calc(var(--radius) - 2px);
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-}
+/* Default Badge */
+bg-neutral-200 text-gray-900
 
-/* Card Header */
-.card-header {
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--border);
-}
+/* Success Badge */
+bg-green-100 text-green-800
 
-/* Card Content */
-.card-content {
-  padding: 1.5rem;
-  padding-top: 0;
-}
+/* Warning Badge */
+bg-yellow-100 text-yellow-800
 
-/* Card Footer */
-.card-footer {
-  padding: 1.5rem;
-  padding-top: 0;
-  display: flex;
-  align-items: center;
-}
+/* Error Badge */
+bg-red-100 text-red-800
+
+/* Info Badge */
+bg-cyan-100 text-cyan-800
 ```
 
-## 📍 Travel-Specific Colors
-
-### Status Indicators
+### Input States
 ```css
-/* Trip Status Colors */
-.status-draft { color: var(--muted-foreground); }
-.status-confirmed { color: var(--success); }
-.status-in-progress { color: var(--info); }
-.status-completed { color: var(--primary); }
-.status-cancelled { color: var(--destructive); }
+/* Default Input */
+border-gray-300 focus:border-green-600 focus:ring-green-600
 
-/* Expense Status Colors */
-.expense-status-pending { 
-  background-color: var(--warning);
-  color: var(--warning-foreground);
-}
-.expense-status-approved { 
-  background-color: var(--success);
-  color: var(--success-foreground);
-}
-.expense-status-rejected { 
-  background-color: var(--destructive);
-  color: var(--destructive-foreground);
-}
+/* Error Input */
+border-red-500 focus:border-red-500 focus:ring-red-500
 
-/* Meeting Confirmation Colors */
-.confirmation-pending { color: var(--warning); }
-.confirmation-confirmed { color: var(--success); }
-.confirmation-declined { color: var(--destructive); }
+/* Success Input */
+border-green-500 focus:border-green-500 focus:ring-green-500
 ```
 
-### Currency Display
+## 📱 Responsive Design Classes
+
+### Container System
 ```css
-/* Currency-specific colors */
-.currency-usd { color: oklch(0.4166 0.0697 152.1075); }
-.currency-brl { color: oklch(0.6539 0.1132 151.7077); }
-.currency-eur { color: oklch(0.3920 0.0890 240.9447); }
-
-/* Amount highlighting */
-.amount-positive { color: var(--success); }
-.amount-negative { color: var(--destructive); }
-.amount-neutral { color: var(--foreground); }
+/* Max widths */
+max-w-sm     /* 384px */
+max-w-md     /* 448px */
+max-w-lg     /* 512px */
+max-w-xl     /* 576px */
+max-w-2xl    /* 672px */
+max-w-4xl    /* 896px */
+max-w-6xl    /* 1152px */
+max-w-7xl    /* 1280px */
 ```
 
-## 🔧 Tailwind Integration
+### Breakpoint Usage
+```css
+/* Mobile First */
+class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
 
-### Tailwind Configuration
-```typescript
-// tailwind.config.ts
-export default {
-  darkMode: 'class',
+/* Sidebar Responsive */
+class="hidden md:block md:w-64 lg:w-72"
+
+/* Navigation Responsive */
+class="block md:hidden" /* Mobile menu toggle */
+class="hidden md:block" /* Desktop navigation */
+```
+
+## 🔧 Tailwind Configuration
+
+### Custom Colors Setup
+```javascript
+// tailwind.config.js
+module.exports = {
   theme: {
     extend: {
       colors: {
-        border: 'var(--border)',
-        input: 'var(--input)',
-        ring: 'var(--ring)',
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
         primary: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
+          DEFAULT: '#16a34a', // green-600
+          foreground: '#ffffff'
         },
         secondary: {
-          DEFAULT: 'var(--secondary)',
-          foreground: 'var(--secondary-foreground)',
-        },
-        destructive: {
-          DEFAULT: 'var(--destructive)',
-          foreground: 'var(--destructive-foreground)',
-        },
-        muted: {
-          DEFAULT: 'var(--muted)',
-          foreground: 'var(--muted-foreground)',
+          DEFAULT: '#e5e5e5', // neutral-200
+          foreground: '#171717'  // gray-900
         },
         accent: {
-          DEFAULT: 'var(--accent)',
-          foreground: 'var(--accent-foreground)',
+          DEFAULT: '#f5f5f5', // neutral-100
+          foreground: '#171717'
         },
-        card: {
-          DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
+        destructive: {
+          DEFAULT: '#dc2626', // red-600
+          foreground: '#ffffff'
         },
-        sidebar: {
-          DEFAULT: 'var(--sidebar)',
-          foreground: 'var(--sidebar-foreground)',
-          primary: 'var(--sidebar-primary)',
-          'primary-foreground': 'var(--sidebar-primary-foreground)',
-          accent: 'var(--sidebar-accent)',
-          'accent-foreground': 'var(--sidebar-accent-foreground)',
-          border: 'var(--sidebar-border)',
-          ring: 'var(--sidebar-ring)',
+        success: {
+          DEFAULT: '#059669', // green-600
+          foreground: '#ffffff'
         },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-    },
-  },
-};
-```
-
-### CSS Variables Setup
-```css
-/* globals.css */
-@layer base {
-  :root {
-    /* Radius */
-    --radius: 0.5rem;
-    
-    /* All color variables defined here */
-    --background: oklch(0.9500 0.0156 86.4259);
-    --foreground: oklch(0 0 0);
-    /* ... rest of color variables */
-  }
-  
-  .dark {
-    /* Dark mode overrides */
-    --background: oklch(0.2407 0.0083 240.2250);
-    --foreground: oklch(0.7595 0.0107 238.5621);
-    /* ... rest of dark color variables */
+        warning: {
+          DEFAULT: '#fbbf24', // yellow-400
+          foreground: '#000000'
+        },
+        info: {
+          DEFAULT: '#0891b2', // cyan-600
+          foreground: '#ffffff'
+        }
+      }
+    }
   }
 }
-
-/* Ensure smooth transitions */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
 ```
 
-## 🧪 Testing & Validation
-
-### Color Contrast Testing
-```typescript
-// Accessibility validation
-const validateContrast = (foreground: string, background: string): boolean => {
-  // WCAG 2.1 AA requires 4.5:1 contrast ratio for normal text
-  // WCAG 2.1 AA requires 3:1 contrast ratio for large text
-  const ratio = calculateContrastRatio(foreground, background);
-  return ratio >= 4.5;
-};
-
-// Test all color combinations
-const contrastTests = [
-  { fg: '--primary-foreground', bg: '--primary' },
-  { fg: '--secondary-foreground', bg: '--secondary' },
-  { fg: '--accent-foreground', bg: '--accent' },
-  { fg: '--destructive-foreground', bg: '--destructive' },
-  { fg: '--muted-foreground', bg: '--muted' },
-  { fg: '--card-foreground', bg: '--card' },
-];
-```
-
-### Browser Support
-- **Modern browsers**: Full OKLCH support (Chrome 111+, Firefox 113+, Safari 15.4+)
-- **Fallback strategy**: Automatic conversion to RGB for older browsers
-- **Color space detection**: Progressive enhancement approach
-
-## 📱 Interactive Demo
-
-### Color System Demo Component
-Available at `/test-page` → "View Color System"
-
-Features:
-- Live color palette display
-- Theme switching demonstration
-- Contrast ratio validation
-- Color picker for custom modifications
-- Export functionality for design tokens
-
-## 🎯 Best Practices
-
-### Do's
-- ✅ Use CSS variables for all colors
-- ✅ Test in both light and dark modes
-- ✅ Validate contrast ratios
-- ✅ Use semantic color names
-- ✅ Leverage Tailwind utilities
-
-### Don'ts
-- ❌ Hardcode color values in components
-- ❌ Create new colors without system integration
-- ❌ Ignore accessibility requirements
-- ❌ Override theme colors without consideration
-- ❌ Use colors outside the defined palette
-
-## 🔄 Migration Guide
-
-### From Hardcoded Colors
+### Component Utility Classes
 ```css
-/* Before */
-.button {
-  background-color: #16a34a;
-  color: white;
+/* Card Components */
+.card {
+  @apply bg-white border border-gray-200 rounded-lg shadow-sm;
 }
 
-/* After */
-.button {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
+.card-header {
+  @apply px-6 py-4 border-b border-gray-200;
+}
+
+.card-content {
+  @apply px-6 py-4;
+}
+
+.card-footer {
+  @apply px-6 py-4 border-t border-gray-200;
+}
+
+/* Button Components */
+.btn {
+  @apply px-4 py-2 rounded-md font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply btn bg-green-600 hover:bg-green-700 text-white;
+}
+
+.btn-secondary {
+  @apply btn bg-neutral-200 hover:bg-neutral-300 text-gray-900;
+}
+
+.btn-destructive {
+  @apply btn bg-red-600 hover:bg-red-700 text-white;
 }
 ```
 
-### From Tailwind Classes
+## 🎨 Theme Implementation
+
+### Dark Mode Classes
+Add `dark:` prefix to all classes for dark mode variants:
+```css
+/* Example: Card in light and dark mode */
+bg-white dark:bg-slate-800 
+text-gray-900 dark:text-slate-200 
+border-gray-200 dark:border-slate-700
+```
+
+### Theme Toggle Button
+```css
+bg-neutral-100 hover:bg-neutral-200 
+dark:bg-slate-700 dark:hover:bg-slate-600 
+text-gray-900 dark:text-slate-200
+```
+
+## 📋 Usage Examples
+
+### Dashboard Card
 ```html
-<!-- Before -->
-<div class="bg-green-600 text-white">
-
-<!-- After -->
-<div class="bg-primary text-primary-foreground">
+<div class="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-sm">
+  <div class="px-6 py-4 border-b border-gray-200 dark:border-slate-700">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-slate-200">Trip Details</h3>
+  </div>
+  <div class="px-6 py-4">
+    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+      Pending
+    </span>
+  </div>
+</div>
 ```
 
----
-*Last updated: January 2025*  
-*Version: 1.0*  
-*Full OKLCH implementation with Tailwind integration*
+### Navigation Item
+```html
+<a class="flex items-center px-4 py-2 text-gray-600 hover:bg-neutral-100 hover:text-gray-900 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-slate-200 rounded-md transition-colors">
+  Dashboard
+</a>
+```
+
+### Form Input
+```html
+<input class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-md bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-200 focus:border-green-600 focus:ring-1 focus:ring-green-600">
+```
+
+## 🔄 Migration Notes
+Replace all instances of CSS variables with these Tailwind classes:
+```
+var(--primary) → bg-green-600
+var(--background) → bg-neutral-100 dark:bg-slate-800
+var(--foreground) → text-black dark:text-slate-200
+var(--muted) → bg-neutral-200 dark:bg-slate-700
+var(--card) → bg-white dark:bg-slate-800
+var(--border) → border-gray-200 dark:border-slate-700
+```
+
+This ensures consistent styling across the entire application while maintaining the established design system.

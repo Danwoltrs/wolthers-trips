@@ -2,7 +2,7 @@
 ## Comprehensive Technical Specification & Deep Implementation Guide
 
 ### Tech Stack & Architecture
-- **Frontend**: React 18+ with TypeScript, Tailwind CSS with OKLCH color system
+- **Frontend**: React 18+ with TypeScript, Tailwind CSS with Tailwind color system
 - **Backend**: Supabase (PostgreSQL 15+, Row Level Security, Real-time subscriptions)
 - **Email**: Hostinger SMTP with template engine
 - **AI Integration**: Claude API (Anthropic) + OpenAI GPT-4
@@ -10,7 +10,7 @@
 - **Deployment**: Hostinger VPS with Docker containers
 - **State Management**: Zustand + React Query for server state
 - **File Storage**: Supabase Storage with CDN
-- **Design System**: Centralized OKLCH color system with light/dark theme support
+- **Design System**: Centralized Tailwind color system with light/dark theme support
 
 ---
 
@@ -71,8 +71,8 @@ const autoLoginRules = {
 
 ## 2. UI Design System & Color Architecture
 
-### Centralized OKLCH Color System
-The application implements a comprehensive color system using exact OKLCH values for consistent, theme-aware design across all components:
+### Centralized Tailwind Color System
+The application implements a comprehensive color system using Tailwind classes for consistent, theme-aware design across all components:
 
 ```css
 /* Brand Colors */
@@ -286,7 +286,7 @@ export default {
 - **Component Showcase**: All styled components with live examples
 - **Theme Switching**: Real-time theme switching demonstration
 - **Accessibility Testing**: Color contrast validation tools
-- **Browser Compatibility**: OKLCH color space support verification
+- **Browser Compatibility**: Tailwind color scheme verification
 
 ---
 
