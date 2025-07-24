@@ -1,110 +1,27 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { getAllTrips, getTripTimeCategory, getStatusConfig, type TripWithDetails } from '@/lib/trips';
 
-// Mock trip data with varying content lengths for testing fixed heights
-const trips = [
-  {
-    id: 1,
-    title: 'Brazil Coffee Origins Tour',
-    client: 'Green Coffee Co.',
-    startDate: '2024-01-15',
-    endDate: '2024-01-22',
-    staff: ['John Smith', 'Maria Santos', 'Pedro Oliveira'],
-    vehicle: 'Toyota Hilux',
-    driver: 'Carlos Silva',
-    cities: ['São Paulo', 'Santos', 'Campinas', 'Ribeirão Preto', 'Franca'],
-    type: 'current',
-    status: 'in_progress'
-  },
-  {
-    id: 2,
-    title: 'Colombia Specialty Coffee Visit',
-    client: 'Premium Roasters Ltd.',
-    startDate: '2024-02-10',
-    endDate: '2024-02-17',
-    staff: ['Ana Rodriguez', 'James Wilson'],
-    vehicle: 'Ford Ranger',
-    driver: 'Miguel Torres',
-    cities: ['Medellín', 'Armenia', 'Manizales'],
-    type: 'current',
-    status: 'scheduled'
-  },
-  {
-    id: 3,
-    title: 'Guatemala Highland Farms Exploration',
-    client: 'Specialty Coffee Imports',
-    startDate: '2024-03-05',
-    endDate: '2024-03-12',
-    staff: ['Sarah Johnson', 'Roberto Gutierrez', 'Lisa Chen', 'David Brown'],
-    vehicle: 'Nissan Frontier',
-    driver: 'Juan Morales',
-    cities: ['Antigua', 'Huehuetenango', 'Cobán', 'Chimaltenango', 'Quetzaltenango', 'Sololá'],
-    type: 'current',
-    status: 'to_be_confirmed'
-  },
-  {
-    id: 4,
-    title: 'Costa Rica Micromill Tour',
-    client: 'Artisan Coffee Co.',
-    startDate: '2023-11-20',
-    endDate: '2023-11-27',
-    staff: ['Michael Davis', 'Carmen Lopez'],
-    vehicle: 'Chevrolet Colorado',
-    driver: 'Fernando Vega',
-    cities: ['San José', 'Cartago', 'Turrialba', 'Tarrazú'],
-    type: 'past',
-    status: 'completed'
-  },
-  {
-    id: 5,
-    title: 'Ecuador Specialty Farms Assessment',
-    client: 'Global Coffee Solutions',
-    startDate: '2023-10-15',
-    endDate: '2023-10-22',
-    staff: ['Patricia Wilson', 'Carlos Mendoza', 'Elena Vargas'],
-    vehicle: 'Toyota Land Cruiser',
-    driver: 'Ricardo Moreno',
-    cities: ['Quito', 'Loja', 'Zamora', 'Vilcabamba'],
-    type: 'past',
-    status: 'completed'
-  },
-];
-
-function calculateTripDuration(startDate: string, endDate: string) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
-  const timeDiff = end.getTime() - start.getTime();
-  const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  return daysDiff;
+function formatRegionsList(regions: string[] | null) {
+  if (!regions || regions.length === 0) return 'No regions specified';
+  if (regions.length <= 4) {
+    return regions.join(', ');
+  }
+  return regions.slice(0, 4).join(', ') + '...';
 }
 
-function formatCitiesList(cities: string[]) {
-  if (cities.length <= 4) {
-    return cities.join(', ');
+function formatClientsList(clients: string[] | null) {
+  if (!clients || clients.length === 0) return 'No clients specified';
+  if (clients.length <= 3) {
+    return clients.join(', ');
   }
-  return cities.slice(0, 4).join(', ') + '...';
-}
-
-function formatStaffList(staff: string[]) {
-  if (staff.length <= 3) {
-    return staff.join(', ');
-  }
-  return staff.slice(0, 3).join(', ') + '...';
+  return clients.slice(0, 3).join(', ') + '...';
 }
 
 function getStatusBadge(status: string) {
-  const statusConfig = {
-    in_progress: { label: 'Trip in progress', className: 'bg-success text-white' },
-    scheduled: { label: 'Scheduled', className: 'bg-info text-white' },
-    to_be_confirmed: { label: 'To be confirmed', className: 'bg-warning text-white' },
-    completed: { label: 'Completed', className: 'bg-muted text-muted-foreground' }
-  };
-  
-  const config = statusConfig[status as keyof typeof statusConfig] || { 
-    label: status, 
-    className: 'bg-muted text-muted-foreground' 
-  };
+  const config = getStatusConfig(status);
   
   return (
     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${config.className}`}>
@@ -113,14 +30,7 @@ function getStatusBadge(status: string) {
   );
 }
 
-function TripCard({ trip }: { trip: any }) {
-  const tripDuration = calculateTripDuration(trip.startDate, trip.endDate);
-  const startDate = new Date(trip.startDate).toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  });
-  
+function TripCard({ trip }: { trip: TripWithDetails }) {
   return (
     <Card className="hover:shadow-md transition-shadow flex flex-col h-full">
       <CardHeader className="pb-4">
@@ -130,62 +40,151 @@ function TripCard({ trip }: { trip: any }) {
           {getStatusBadge(trip.status)}
         </div>
         
-        {/* Company name as subtitle */}
-        <p className="text-muted-foreground text-sm mb-4">{trip.client}</p>
+        {/* Clients as subtitle */}
+        <p className="text-muted-foreground text-sm mb-4">{formatClientsList(trip.main_clients)}</p>
         
         {/* Trip duration pill and start date */}
         <div>
           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-accent text-accent-foreground">
-            {tripDuration + 1} days
+            {trip.duration} days
           </span>
-          <p className="text-sm text-muted-foreground mt-2">Starts {startDate}</p>
+          <p className="text-sm text-muted-foreground mt-2">Starts {trip.formattedStartDate}</p>
         </div>
       </CardHeader>
       
       <CardContent className="flex-1 space-y-3 pt-0">
         <div>
-          <p className="text-sm font-medium text-foreground mb-1">Wolthers Staff</p>
-          <p className="text-sm text-muted-foreground">{formatStaffList(trip.staff)}</p>
+          <p className="text-sm font-medium text-foreground mb-1">Trip Type</p>
+          <p className="text-sm text-muted-foreground">{trip.type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
         </div>
         
         <div>
-          <p className="text-sm font-medium text-foreground mb-1">Vehicle</p>
-          <p className="text-sm text-muted-foreground">{trip.vehicle} • Driver: {trip.driver}</p>
+          <p className="text-sm font-medium text-foreground mb-1">Regions</p>
+          <p className="text-sm text-muted-foreground">{formatRegionsList(trip.regions)}</p>
         </div>
         
-        <div>
-          <p className="text-sm font-medium text-foreground mb-1">Cities</p>
-          <p className="text-sm text-muted-foreground">{formatCitiesList(trip.cities)}</p>
-        </div>
+        {trip.estimated_cost && (
+          <div>
+            <p className="text-sm font-medium text-foreground mb-1">Estimated Cost</p>
+            <p className="text-sm text-muted-foreground">
+              {new Intl.NumberFormat('en-US', { 
+                style: 'currency', 
+                currency: 'USD' 
+              }).format(trip.estimated_cost)}
+            </p>
+          </div>
+        )}
+        
+        {trip.description && (
+          <div>
+            <p className="text-sm font-medium text-foreground mb-1">Description</p>
+            <p className="text-sm text-muted-foreground line-clamp-2">{trip.description}</p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
 
 export default function DashboardPage() {
-  const currentTrips = trips.filter(trip => trip.type === 'current');
-  const pastTrips = trips.filter(trip => trip.type === 'past');
+  const [trips, setTrips] = useState<TripWithDetails[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchTrips() {
+      try {
+        setLoading(true);
+        const { data, error } = await getAllTrips();
+        
+        if (error) {
+          setError('Failed to load trips. Please try again later.');
+          console.error('Error fetching trips:', error);
+        } else {
+          setTrips(data || []);
+        }
+      } catch (err) {
+        setError('An unexpected error occurred.');
+        console.error('Unexpected error:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchTrips();
+  }, []);
+
+  // Categorize trips by time
+  const currentAndUpcomingTrips = trips.filter(trip => {
+    const category = getTripTimeCategory(trip.start_date, trip.end_date);
+    return category === 'current' || category === 'upcoming';
+  });
+
+  const pastTrips = trips.filter(trip => {
+    const category = getTripTimeCategory(trip.start_date, trip.end_date);
+    return category === 'past';
+  });
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <p className="text-destructive mb-4">{error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
       {/* Current & Upcoming Trips */}
       <div className="mb-12">
-        <h2 className="text-2xl font-bold text-foreground mb-6">Current & Upcoming Trips</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {currentTrips.map((trip) => (
-            <TripCard key={trip.id} trip={trip} />
-          ))}
-        </div>
+        <h2 className="text-2xl font-bold text-foreground mb-6">
+          Current & Upcoming Trips ({currentAndUpcomingTrips.length})
+        </h2>
+        {currentAndUpcomingTrips.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            <p>No current or upcoming trips found.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {currentAndUpcomingTrips.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Past Trips */}
       <div>
-        <h2 className="text-2xl font-bold text-muted-foreground mb-6">Past Trips</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {pastTrips.map((trip) => (
-            <TripCard key={trip.id} trip={trip} />
-          ))}
-        </div>
+        <h2 className="text-2xl font-bold text-muted-foreground mb-6">
+          Past Trips ({pastTrips.length})
+        </h2>
+        {pastTrips.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            <p>No past trips found.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {pastTrips.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

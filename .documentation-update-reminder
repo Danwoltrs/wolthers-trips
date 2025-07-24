@@ -1,0 +1,55 @@
+DOCUMENTATION UPDATE REMINDER
+=============================
+Significant changes were detected in this commit.
+
+Please review and update the following if needed:
+1. README.md - Update project structure section
+2. CLAUDE.md - Update if architecture or patterns changed
+3. Component documentation - Document new components
+4. API documentation - Document new endpoints
+
+Changed files in this commit:
+.claude/settings.local.json
+.githooks/post-commit
+.githooks/pre-commit
+.mcp.json
+CLAUDE.md
+README.md
+docs/core/CLAUDE.md
+docs/core/color_system.md
+docs/database-diagrams.md
+docs/frontend-implementation.md
+examples/travel-itineraries-main.tsx
+examples/visit-notes-modal.tsx
+initial.md
+integrated-system-schema.md
+package-lock.json
+package.json
+scripts/analyze-database.js
+scripts/brazil-expenses-only.js
+scripts/brazil-meetings-only.js
+scripts/brazil-trip-simple.js
+scripts/create-brazil-trip-final.js
+scripts/create-brazil-trip.js
+scripts/create-data-map.js
+scripts/discover-enums.js
+scripts/list-data.js
+scripts/seed-brazil-trip.js
+scripts/seed-test-data.js
+scripts/simple-brazil-trip.js
+scripts/simple-seed.js
+scripts/update-docs.js
+src/app/dashboard/expenses/page.tsx
+src/app/dashboard/page.tsx
+src/components/trips/DashboardStats.tsx
+src/components/trips/ExpenseCard.tsx
+src/components/trips/TripCard.tsx
+src/hooks/use-trips.ts
+src/hooks/useTrips.ts
+src/lib/services/database.ts
+src/lib/services/trips.ts
+src/types/database.ts
+src/types/trips.ts
+
+To dismiss this reminder, delete this file:
+rm .documentation-update-reminder
