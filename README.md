@@ -146,19 +146,6 @@ The application uses a comprehensive PostgreSQL schema with 14+ core tables:
 ### OKLCH Color System
 The application implements a comprehensive color system using exact OKLCH values for consistent, theme-aware design:
 
-```css
-/* Brand Colors */
---primary: oklch(0.4293 0.0597 164.4252);           /* Wolthers brand green */
---secondary: oklch(1.0000 0 0);                      /* Clean white */
---accent: oklch(0.7882 0.0642 76.1505);             /* Hover states */
---destructive: oklch(0.5770 0.2450 27.3250);        /* Error states */
-
-/* Layout Colors */
---background: oklch(0.9500 0.0156 86.4259);         /* App background */
---foreground: oklch(0 0 0);                         /* Main text */
---card: oklch(1 0 0);                               /* Card backgrounds */
---border: oklch(0.9220 0 0);                        /* Borders */
-```
 
 ### Theme Features
 - **Light/Dark Mode** - Complete theme switching with system detection
