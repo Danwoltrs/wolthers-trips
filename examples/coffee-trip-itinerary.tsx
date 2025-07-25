@@ -503,9 +503,9 @@ const CoffeTripItinerary: React.FC = () => {
                       ))}
                     </div>
                     {review.isPublic ? (
-                      <Eye className="w-4 h-4 text-green-600" title="Public review" />
+                      <Eye className="w-4 h-4 text-green-600" aria-label="Public review" />
                     ) : (
-                      <EyeOff className="w-4 h-4 text-gray-400" title="Private review" />
+                      <EyeOff className="w-4 h-4 text-gray-400" aria-label="Private review" />
                     )}
                   </div>
                   <span className="text-xs text-gray-500">{review.timestamp.toLocaleDateString()}</span>
