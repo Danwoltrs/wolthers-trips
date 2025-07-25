@@ -35,8 +35,73 @@
       "Bash(npm start)",
       "Bash(npx next build:*)",
       "Bash(timeout 5 npm run dev)",
-      "Bash(timeout 3 npm run dev)"
+      "Bash(timeout 3 npm run dev)",
+      "Bash(node:*)",
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "Bash(npm uninstall:*)",
+      "Bash(sed:*)",
+      "mcp__supabase__execute_sql",
+      "Bash(NEXT_PUBLIC_SUPABASE_URL=\"https://ocddrrzhautoybqmebsx.supabase.co\" NEXT_PUBLIC_SUPABASE_ANON_KEY=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9jZGRycnpoYXV0b3licW1lYnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEwODk2NzcsImV4cCI6MjAzNjY2NTY3N30.qSdh4C6C-EQN7CowOjF2xzLPKBdvgEOhR8QR2hRZhNY\" node -e 'console.log(\"\"Testing environment variables:\"\"); console.log(\"\"URL:\"\", process.env.NEXT_PUBLIC_SUPABASE_URL); console.log(\"\"Key:\"\", process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? \"\"Present\"\" : \"\"Missing\"\");')",
+      "Bash(NEXT_PUBLIC_SUPABASE_URL=\"https://ocddrrzhautoybqmebsx.supabase.co\" NEXT_PUBLIC_SUPABASE_ANON_KEY=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9jZGRycnpoYXV0b3licW1lYnN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjEwODk2NzcsImV4cCI6MjAzNjY2NTY3N30.qSdh4C6C-EQN7CowOjF2xzLPKBdvgEOhR8QR2hRZhNY\" node -e \"\nconst { createClient } = require(''@supabase/supabase-js'');\nconst supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);\n\nasync function main() {\n  const { data, error } = await supabase.from(''trips'').select(''*'').order(''start_date'', { ascending: false });\n  if (error) {\n    console.log(''Error:'', error.message);\n  } else if (!data || data.length === 0) {\n    console.log(''No trips found'');\n  } else {\n    console.log(''Found '' + data.length + '' trips'');\n    data.forEach((trip, i) => {\n      console.log((i+1) + ''. '' + trip.title + '' ('' + trip.start_date + '' - '' + trip.end_date + '')'');\n      console.log(''   Type: '' + trip.type + '', Status: '' + trip.status);\n      console.log(''   Estimated: $'' + (trip.estimated_cost || 0) + '', Actual: $'' + (trip.actual_cost || 0));\n    });\n  }\n}\nmain();\n\")",
+      "mcp__supabase__list_tables"
     ],
     "deny": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ],
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "Analyze the code that's about to be modified. If you detect functions over 50 lines, high complexity, code duplication, or violation of SOLID principles, suggest specific refactoring improvements before the changes are made. Focus on maintainability and readability."
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "Scan the code for security vulnerabilities before modification. Check for hardcoded secrets, SQL injection risks, XSS vulnerabilities, insecure authentication, and sensitive data exposure. Block unsafe operations."
+          },
+          {
+            "type": "command",
+            "command": "Review code architecture and implementation quality after changes. Ensure design patterns are properly applied, code follows best practices, and suggest architectural improvements."
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "Analyze the code changes and execution results for potential bugs, runtime errors, memory leaks, and logical issues. Identify error patterns and suggest debugging strategies."
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "Review the code changes and ensure adequate test coverage exists. Suggest missing tests, identify testing gaps, and recommend test automation strategies for the modified code."
+          },
+          {
+            "type": "command",
+            "command": "Review database-related operations before execution. Validate schema changes, check query performance, ensure RLS policies are correct, and verify Supabase best practices are followed."
+          },
+          {
+            "type": "command",
+            "command": "Review UI/component changes for responsive design, accessibility compliance, Tailwind CSS best practices, and user experience optimization. Suggest design improvements."
+          }
+        ]
+      }
+    ]
   }
 }
