@@ -9,7 +9,7 @@ Comprehensive travel itinerary management web application for Wolthers & Associa
 - ✅ **Storage buckets** - Created and configured
 - ✅ **Authentication** - Working (Microsoft OAuth + Email OTP)
 - ✅ **Environment variables** - Configured for development
-- ✅ **Color system** - Complete Tailwind-based theme system
+- ✅ **Color system** - Complete Tailwind CSS v3.4+ based theme system
 - ✅ **Connection testing** - Test page created and working
 - 🎯 **Next Phase** - Dashboard and core features
 
@@ -75,7 +75,7 @@ docs/
 ### 💡 Development Guidelines
 - **TypeScript strict mode** throughout
 - **Zod validation** for all inputs
-- **Tailwind color system** for consistent theming
+- **Tailwind CSS v3.4+ color system** for consistent theming
 - **Row Level Security (RLS)** for all database operations
 - **Responsive design** with mobile-first approach
 - **Accessibility** (WCAG 2.1 AA compliance)

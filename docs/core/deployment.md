@@ -182,7 +182,7 @@ const emailConfig = {
 # Build process:
 - Next.js static optimization
 - TypeScript compilation
-- Tailwind CSS compilation
+- Tailwind CSS v3.4+ compilation
 - Asset optimization
 ```
 

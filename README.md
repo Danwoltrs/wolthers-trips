@@ -23,7 +23,7 @@ This is a full-stack travel management application designed for **Wolthers & Ass
 ### Frontend
 - **Next.js 15+** with App Router and TypeScript
 - **React 18+** for component-based UI development
-- **Tailwind CSS** with centralized color system
+- **Tailwind CSS v3.4+** with centralized color system
 - **Zustand** for client-side state management
 - **React Query** for server state management and caching
 

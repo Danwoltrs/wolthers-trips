@@ -319,3 +319,32 @@ var(--border) → border-gray-200 dark:border-slate-700
 ```
 
 This ensures consistent styling across the entire application while maintaining the established design system.
+
+## ⚠️ Important Configuration Update (July 2025)
+
+### Tailwind CSS Version Change
+- **Previous**: Tailwind CSS v4.x (beta) with `@tailwindcss/postcss`
+- **Current**: Tailwind CSS v3.4.17 (stable) with standard `tailwindcss` plugin
+
+### PostCSS Configuration
+```javascript
+// postcss.config.js (Updated)
+module.exports = {
+  plugins: {
+    tailwindcss: {},  // Changed from @tailwindcss/postcss
+    autoprefixer: {},
+  },
+}
+```
+
+### CSS Import Syntax
+```css
+/* globals.css - Standard v3 syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+This ensures stable CSS generation and proper styling across all components.
+
+EOF < /dev/null

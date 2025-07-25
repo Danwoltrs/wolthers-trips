@@ -1,4 +1,4 @@
-# Styling Documentation - Tailwind Color Codes
+# Styling Documentation - Tailwind CSS v3.4+ Color System
 
 ## 🎨 Core Color System
 
@@ -185,7 +185,7 @@ class="hidden md:block" /* Desktop navigation */
 
 ### Custom Colors Setup
 ```javascript
-// tailwind.config.js
+// tailwind.config.ts (v3.4+)
 module.exports = {
   theme: {
     extend: {

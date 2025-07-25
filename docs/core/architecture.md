@@ -6,7 +6,7 @@
 - **Next.js 14+** with App Router for both frontend and backend
 - **TypeScript** throughout the entire application
 - **Supabase** as primary backend (PostgreSQL + Auth + Storage + Real-time)
-- **Tailwind CSS** for styling with centralized color system
+- **Tailwind CSS v3.4+** for styling with centralized color system
 - **React** for component-based UI development
 
 ### Libraries & Services
