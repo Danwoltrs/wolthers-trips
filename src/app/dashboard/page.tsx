@@ -166,128 +166,67 @@ export default function DashboardPage() {
     const category = getTripTimeCategory(trip.start_date, trip.end_date);
     return category === 'past';
   });
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <header className="bg-green-800 text-white shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center">
-                <img src="/assets/images/logos/wolthers-logo-green.svg" alt="Wolthers Associates" className="h-8" />
-              </div>
-              <div className="hidden md:flex items-center space-x-4">
-                <button className="p-2 hover:bg-green-700 rounded">
-                  <Bell className="w-5 h-5" />
-                </button>
-                <button className="p-2 hover:bg-green-700 rounded">
-                  <Settings className="w-5 h-5" />
-                </button>
-                <button className="p-2 hover:bg-green-700 rounded">
-                  <User className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
+  const header = (
+    <header className="bg-green-800 text-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <img src="/assets/images/logos/wolthers-logo-green.svg" alt="Wolthers Associates" className="h-8" />
           </div>
-        </header>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        {/* Header */}
-        <header className="bg-green-800 text-white shadow-lg">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-              <div className="flex items-center">
-                <img src="/assets/images/logos/wolthers-logo-green.svg" alt="Wolthers Associates" className="h-8" />
-              </div>
-              <div className="hidden md:flex items-center space-x-4">
-                <button className="p-2 hover:bg-green-700 rounded">
-                  <Bell className="w-5 h-5" />
-                </button>
-                <button className="p-2 hover:bg-green-700 rounded">
-                  <Settings className="w-5 h-5" />
-                </button>
-                <button className="p-2 hover:bg-green-700 rounded">
-                  <User className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </header>
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-center">
-            <p className="text-red-600 mb-4">{error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
-              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
-            >
-              Retry
+          <div className="hidden md:flex items-center space-x-4">
+            <button className="p-2 hover:bg-green-700 rounded">
+              <Bell className="w-5 h-5" />
+            </button>
+            <button className="p-2 hover:bg-green-700 rounded">
+              <Settings className="w-5 h-5" />
+            </button>
+            <button className="p-2 hover:bg-green-700 rounded">
+              <User className="w-5 h-5" />
             </button>
           </div>
         </div>
+        <div className="hidden md:block pb-2">
+          <p className="text-green-200 text-sm">Welcome back, Daniel Wolthers</p>
+        </div>
+      </div>
+    </header>
+  );
+
+  let content;
+  if (loading) {
+    content = (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
       </div>
     );
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-green-800 text-white shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div className="flex items-center">
-              <img src="/assets/images/logos/wolthers-logo-green.svg" alt="Wolthers Associates" className="h-8" />
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <button className="p-2 hover:bg-green-700 rounded">
-                <Bell className="w-5 h-5" />
-              </button>
-              <button className="p-2 hover:bg-green-700 rounded">
-                <Settings className="w-5 h-5" />
-              </button>
-              <button className="p-2 hover:bg-green-700 rounded">
-                <User className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Username */}
-          <div className="hidden md:block pb-2">
-            <p className="text-green-200 text-sm">Welcome back, Daniel Wolthers</p>
-          </div>
+  } else if (error) {
+    content = (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+          >
+            Retry
+          </button>
         </div>
-      </header>
-
-      {/* Main Content */}
+      </div>
+    );
+  } else {
+    content = (
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-center mb-8" style={{ color: '#B8860B' }}>Travel Itineraries</h1>
-
-        {/* Upcoming Trips Section */}
         <section className="mb-12">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-semibold text-gray-800">Upcoming Trips</h2>
           </div>
-          
           <div className="flex flex-wrap gap-4 max-w-5xl mx-auto justify-center">
-            {/* Create New Trip Card */}
             <div className="bg-white rounded-lg shadow-sm border-2 border-dashed hover:shadow-md hover:bg-green-50 transition-all duration-200 cursor-pointer w-20 h-96 group" style={{ borderColor: '#D4C6B0' }}>
               <div className="h-full flex items-center justify-center">
                 <Plus className="w-8 h-8 group-hover:text-green-600 transition-colors duration-200" style={{ color: '#B8A082' }} />
               </div>
             </div>
-
-            {/* Upcoming Trip Cards */}
             {currentAndUpcomingTrips.length === 0 ? (
               <div className="text-center py-12 text-gray-500 w-full">
                 <p>No current or upcoming trips found.</p>
@@ -299,13 +238,10 @@ export default function DashboardPage() {
             )}
           </div>
         </section>
-
-        {/* Past Trips Section */}
         <section>
           <div className="text-center mb-6">
             <h2 className="text-2xl font-semibold text-gray-500">Past Trips</h2>
           </div>
-          
           <div className="flex flex-wrap gap-4 max-w-5xl mx-auto justify-center">
             {pastTrips.length === 0 ? (
               <div className="text-center py-12 text-gray-500 w-full">
@@ -319,6 +255,13 @@ export default function DashboardPage() {
           </div>
         </section>
       </main>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {header}
+      {content}
     </div>
   );
 }
