@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { Calendar, MapPin, Users, Car, Clock, Plus, Menu, X, Bell, Settings, User, Eye, EyeOff, ExternalLink } from 'lucide-react';
+import { addWolthersStaff } from '@/app/actions/add-wolthers-staff';
 
 // TypeScript interfaces
 interface Guest {
@@ -42,6 +43,10 @@ interface Trip {
 const TravelItinerariesMain: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const [showAddStaff, setShowAddStaff] = useState(false);
+  const [staffName, setStaffName] = useState('');
+  const [staffEmail, setStaffEmail] = useState('');
+  const [isPending, startTransition] = useTransition();
 
   const currentUser = 'Daniel Wolthers';
 
@@ -160,6 +165,31 @@ const TravelItinerariesMain: React.FC = () => {
     // This would navigate to the detailed itinerary page
     console.log('Opening trip itinerary for:', tripId);
     closeTripModal();
+  };
+
+  const handleAddStaff = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedTrip) return;
+    const previous = selectedTrip;
+    const tripId = selectedTrip.id;
+    const optimistic = {
+      ...selectedTrip,
+      wolthersStaff: [...selectedTrip.wolthersStaff, staffName]
+    };
+    setSelectedTrip(optimistic);
+    setShowAddStaff(false);
+
+    startTransition(async () => {
+      try {
+        await addWolthersStaff({ name: staffName, email: staffEmail, tripId });
+      } catch (err) {
+        console.error('Failed to add staff', err);
+        setSelectedTrip(previous);
+      } finally {
+        setStaffName('');
+        setStaffEmail('');
+      }
+    });
   };
 
   return (
@@ -421,7 +451,16 @@ const TravelItinerariesMain: React.FC = () => {
                 </div>
 
                 <div>
-                  <h3 className="font-semibold text-gray-800 mb-2">Wolthers Team</h3>
+                  <h3 className="font-semibold text-gray-800 mb-2 flex items-center">
+                    Wolthers Team
+                    <button
+                      onClick={() => setShowAddStaff(true)}
+                      className="ml-2 text-green-600 hover:text-green-800"
+                      aria-label="Add staff"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </h3>
                   <p className="text-gray-600"><strong>Staff:</strong> {selectedTrip.wolthersStaff.join(', ')}</p>
                   <p className="text-gray-600"><strong>Driver(s):</strong> {selectedTrip.driver}</p>
                 </div>
@@ -466,6 +505,49 @@ const TravelItinerariesMain: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {showAddStaff && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <form onSubmit={handleAddStaff} className="bg-white rounded-lg p-6 w-full max-w-sm space-y-4">
+            <h2 className="text-xl font-bold text-gray-900">Add Staff Member</h2>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                className="mt-1 w-full border rounded px-3 py-2"
+                value={staffName}
+                onChange={e => setStaffName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                className="mt-1 w-full border rounded px-3 py-2"
+                value={staffEmail}
+                onChange={e => setStaffEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="flex justify-end space-x-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setShowAddStaff(false)}
+                className="px-4 py-2 text-gray-600 hover:text-gray-800"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={isPending}
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
+              >
+                {isPending ? 'Adding...' : 'Add'}
+              </button>
+            </div>
+          </form>
         </div>
       )}
     </div>
