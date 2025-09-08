@@ -39,3 +39,18 @@ export interface TripParticipant {
   status: 'invited' | 'confirmed' | 'declined'
   created_at: string
 }
+
+export interface TripEvent {
+  id: string
+  type: 'visit' | 'drive'
+  location: string
+  start: string
+  end: string
+  meetingCode?: string
+  branchId?: string
+  /**
+   * Companies that can view this event.
+   * If empty the event will be hidden from all buyers.
+   */
+  visibleToCompanies: string[]
+}
