@@ -35,48 +35,42 @@ export default function CalendarStep({ tripId }: Props) {
     setShowForm(false)
   }
 
-  if (!logistics?.landing_at) {
-    return (
-      <div className="space-y-2">
-        <button
-          type="button"
-          className="px-3 py-1 border rounded"
-          onClick={() => setShowForm(true)}
-        >
-          Add flight details
-        </button>
-        {showForm && (
-          <FlightForm
-            initial={{ flight_no: '', landing_at: '', airline: '' }}
-            onSave={handleSave}
-            onCancel={() => setShowForm(false)}
-          />
-        )}
-      </div>
-    )
-  }
+  const hasLanding = !!logistics?.landing_at
+  const form = showForm ? (
+    <FlightForm
+      initial={hasLanding ? logistics : { flight_no: '', landing_at: '', airline: '' }}
+      onSave={handleSave}
+      onCancel={() => setShowForm(false)}
+    />
+  ) : null
+
+  const detailsSection = hasLanding ? (
+    <div className="border rounded p-3">
+      <div className="font-medium mb-1">Flight arrival</div>
+      <div>{logistics.airline} {logistics.flight_no}</div>
+      <div>{new Date(logistics.landing_at).toLocaleString()}</div>
+      <button
+        type="button"
+        className="mt-2 text-sm text-blue-600 underline"
+        onClick={() => setShowForm(true)}
+      >
+        Edit details
+      </button>
+    </div>
+  ) : (
+    <button
+      type="button"
+      className="px-3 py-1 border rounded"
+      onClick={() => setShowForm(true)}
+    >
+      Add flight details
+    </button>
+  )
 
   return (
     <div className="space-y-2">
-      <div className="border rounded p-3">
-        <div className="font-medium mb-1">Flight arrival</div>
-        <div>{logistics.airline} {logistics.flight_no}</div>
-        <div>{new Date(logistics.landing_at).toLocaleString()}</div>
-        <button
-          type="button"
-          className="mt-2 text-sm text-blue-600 underline"
-          onClick={() => setShowForm(true)}
-        >
-          Edit details
-        </button>
-      </div>
-      {showForm && (
-        <FlightForm
-          initial={logistics}
-          onSave={handleSave}
-          onCancel={() => setShowForm(false)}
-        />
-      )}
+      {detailsSection}
+      {form}
     </div>
   )
 }
