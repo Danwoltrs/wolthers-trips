@@ -80,6 +80,35 @@ export interface Database {
           created_at?: string
           updated_at?: string
         }
+      },
+      trip_logistics: {
+        Row: {
+          id: string
+          trip_id: string
+          flight_no: string | null
+          landing_at: string | null
+          airline: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          trip_id: string
+          flight_no?: string | null
+          landing_at?: string | null
+          airline?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          trip_id?: string
+          flight_no?: string | null
+          landing_at?: string | null
+          airline?: string | null
+          created_at?: string
+          updated_at?: string
+        }
       }
     }
     Views: {
@@ -97,4 +126,3 @@ export interface Database {
 export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']
 export type TablesInsert<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Insert']
 export type TablesUpdate<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Update']
-EOF < /dev/null
